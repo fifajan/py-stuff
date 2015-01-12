@@ -47,7 +47,7 @@ class MazeSolver:
         if not self.routes:
             self.make_route(1, 1, [], [(1, 1)])
         # return shortest
-        return min(self.routes, key = lambda x: len(x))
+        return min(self.routes, key = len)
         
 def solve_maze(data):
     return MazeSolver(data).solve()
