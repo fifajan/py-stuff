@@ -14,8 +14,10 @@ class HashMap(object):
     table_size_primes = {
         (0, 11) : 11,
         (12, 101) : 101,
-        (102, 10**4 + 7) : 10007,
-        (10**4 + 8, 10**6 + 3) : 1000003,
+        (102, 1009) : 1009,
+        (1010, 10**4 + 7) : 10007,
+        (10**4 + 8, 10**5 + 3) : 100003,
+        (10**5 + 4, 10**6 + 3) : 1000003,
     }
 
     probe_step = 3
@@ -24,7 +26,7 @@ class HashMap(object):
         size = kwargs['size'] if 'size' in kwargs else 100
         self.size = 0
         self.collisions = 0
-        self.table_size = self.get_prime_size(size)
+        self.table_size_range, self.table_size = self.get_prime_size(size)
         self.table = [None] * self.table_size 
 
         if args:
@@ -36,7 +38,7 @@ class HashMap(object):
     def get_prime_size(self, size):
         for mn, mx in self.table_size_primes:
             if mn <= size <= mx:
-                return self.table_size_primes[(mn, mx)]
+                return (mn, mx), self.table_size_primes[(mn, mx)]
         return size
 
     def hash(self, key):
@@ -78,6 +80,12 @@ class HashMap(object):
         if not self.has_key(key):
             self.table[h] = [key, val]
             self.size += 1
+            # it is good for hash table to be 1/3 empty
+            # if self.table_size - self.size < self.table_size / 3.0:
+            #     new_table_size = self.get_prime_size(
+            #                         self.table_size_range[1] + 1)
+            # TODO: finish auto-extension of hash table
+
         elif key != self.table[h][K]:
             while self.has_hash(h):
                 h += self.probe_step
