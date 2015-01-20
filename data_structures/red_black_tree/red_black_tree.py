@@ -7,7 +7,10 @@ class RBTree(object):
     http://www.eternallyconfuzzled.com/tuts/datastructures/jsw_tut_rbtree.aspx
     '''
     def __init__(self):
-        root = None
+        self.root = None
+
+    def __repr__(self):
+        return repr(self.root)
 
     def rot_1(self, root, dir):
         '''
@@ -23,14 +26,14 @@ class RBTree(object):
 
         return save
 
-    def rot_2(self, root, dir)
+    def rot_2(self, root, dir):
         '''
         Double rotation
         '''
         root.nodes[not dir] = self.rot_1(root.nodes[not dir], not dir)
         return self.rot_1(root, dir)
 
-    def rb_assert(root):
+    def rb_assert(self, root):
         '''
         Print message in case there are some Red/Black violations
         '''
@@ -61,12 +64,42 @@ class RBTree(object):
             else:
                 return False
 
+    def make_red_node(self, data):
+        rn = RBNode(data)
+        rn.is_red = True
+        rn.nodes = [None, None]
+        return rn
+
+    def insert_red_node(self, root, data):
+        if not root:
+            root = self.make_red_node(data)
+        elif data != root.data:
+            dir = root.data < data
+            root.nodes[dir] = self.insert_red_node(root.nodes[dir], data)
+
+            # rebalancing should be here
+        return root
+
+    def insert(self, data):
+        self.root = self.insert_red_node(self.root, data)
+        self.root.is_red = False
+
 class RBNode(object):
     '''
     Red Black tree's node
     '''
-    def __init__(self):
+    def __init__(self, data=None):
         self.is_red = False
-        self.data = []
+        self.data = data
         self.nodes = [] # 2 nodes: left ([0]) & right ([1])
 
+    def __repr__(self):
+        pat = '(%s) = %s'
+        pat = '%s\n - %s\n - %s' % ((pat,) * 3)
+        l, r = self.nodes
+        lc, ld = l.color() if l else 'X', l.data if l else 'None'
+        rc, rd = r.color() if r else 'X', r.data if r else 'None'
+        return pat % (self.color(), str(self.data), lc, ld, rc, rd)
+
+    def color(self):
+        return 'R' if self.is_red else 'B'
