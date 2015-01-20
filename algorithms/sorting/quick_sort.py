@@ -3,7 +3,14 @@
 # to test it run:
 # $ ./quick_sort.py array.txt
 
-from sys import argv
+# tests:
+#    Array state     Time     (array is 10^4 integers text file)
+# ---------------------------
+#         random    0.2 s
+#       inverted    3.3 s
+
+
+from sys import argv, setrecursionlimit
 
 A = [int(line) for line in file(argv[1])]
 
@@ -39,7 +46,9 @@ def choose_pi(r):
     pis = sorted([fi, mi, li], key = lambda x: A[x])
     return pis[len(pis)/2]
 
+setrecursionlimit(2**16) # got 'RuntimeError maximum recursion depth' otherwise
+B = A[::]
 sort((0, len(A) - 1))
 
 print '- Does this algorithm work correctly? (checking it now...)'
-print '- ' + 'Yes!' if A == sorted(A) else 'Nope!'
+print '- ' + 'Yes!' if A == sorted(B) else 'Nope!'

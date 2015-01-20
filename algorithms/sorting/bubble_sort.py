@@ -4,6 +4,12 @@
 # $ ./bubble_sort.py array.txt
 # it will take a LONG time (because of O(n^2))
 
+# tests:
+#    Array state     Time     (array is 10^4 integers text file)
+# ---------------------------
+#         random   18.3 s
+#       inverted   25.1 s
+
 from sys import argv
 
 def sort(array):
@@ -26,7 +32,8 @@ def swap(i, j, array):
     A = array
     A[i], A[j] = A[j], A[i]
 
-array = [int(line) for line in file(argv[1])]
+array1 = [int(line) for line in file(argv[1])]
+array2 = array1[::]
 
 print '- Does this algorithm work correctly? (checking it now...)'
-print '- ' + 'Yes!' if sort(array) == sorted(array) else 'Nope!'
+print '- ' + 'Yes!' if sort(array1) == sorted(array2) else 'Nope!'

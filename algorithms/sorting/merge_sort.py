@@ -3,6 +3,12 @@
 # to test it run:
 # $ ./merge_sort.py array.txt
 
+# tests:
+#    Array state     Time     (array is 10^4 integers text file)
+# ---------------------------
+#         random    0.2 s
+#       inverted    0.1 s
+
 from sys import argv
 
 def sort(arr):
@@ -43,8 +49,9 @@ def merge_pretty(l, r):
         res += [lr_min()]
     return res + l + r
 
-array = [int(line) for line in file(argv[1])]
+array1 = [int(line) for line in file(argv[1])]
+array2 = array1[::]
 
 print '- Does this algorithm work correctly? (checking it now...)'
-print '- ' + 'Yes!' if sort(array) == sorted(array) else 'Nope!'
+print '- ' + 'Yes!' if sort(array1) == sorted(array2) else 'Nope!'
 
