@@ -35,7 +35,7 @@ def merge(l, r):
 
 def merge_pretty(l, r):
     '''
-    This merge func looks good but works slower than in should.
+    This merge func looks good but works slower than it should.
     '''
     res = []
     lr_min = lambda: l.pop(0) if l[0] < r[0] else r.pop(0)
