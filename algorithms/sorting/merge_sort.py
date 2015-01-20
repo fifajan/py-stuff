@@ -1,5 +1,8 @@
 #! /usr/bin/python
 
+# to test it run:
+# $ ./merge_sort.py array.txt
+
 from sys import argv
 
 def sort(arr):

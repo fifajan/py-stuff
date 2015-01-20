@@ -1,5 +1,8 @@
 #! /usr/bin/python
 
+# to test it run:
+# $ ./quick_sort.py array.txt
+
 from sys import argv
 
 A = [int(line) for line in file(argv[1])]
