@@ -6,7 +6,14 @@ class RBTree(object):
     Implementation follows this great tutorial:
     http://www.eternallyconfuzzled.com/tuts/datastructures/jsw_tut_rbtree.aspx
     '''
-    pass
+    root = None
 
 class RBNode(object):
-    pass
+    '''
+    Red Black tree's node
+    '''
+    def __init__(self):
+        self.is_red = False
+        self.data = []
+        self.nodes = []
+
