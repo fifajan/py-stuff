@@ -6,6 +6,8 @@ V = 1
 class HashMap(object):
     '''
     My attempt to implement hash map (open addressing).
+    Inspired by a wonderful article about dicts in Python (russian):
+    http://habrahabr.ru/post/247843/
     It happen to be only 3.5 times slower than standart dict!
     (see some basic tests sources & timings in 'tests' sub dir).
     '''
@@ -41,7 +43,7 @@ class HashMap(object):
                 return (mn, mx), self.table_size_primes[(mn, mx)]
         return size
 
-    def hash(self, key):
+    def hash(self, key): # using just a standart library hashing here
         h = hash(key)
         return h % self.table_size
 
