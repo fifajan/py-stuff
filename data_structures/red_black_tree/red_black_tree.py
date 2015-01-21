@@ -1,5 +1,7 @@
 #! /usr/bin/python
 
+L, R = 0, 1
+
 class RBTree(object):
     '''
     My attempt to implement Red Black Tree.
@@ -77,12 +79,26 @@ class RBTree(object):
             dir = root.data < data
             root.nodes[dir] = self.insert_red_node(root.nodes[dir], data)
 
-            # rebalancing should be here
+            # rebalancing:
+            if root.nodes[dir].is_red:
+                if root.nodes[not dir].is_red:
+                    # case 1:
+                    root.is_red = True
+                    root.nodes[L].is_red = False
+                    root.nodes[R].is_red = False
+                else:
+                    # cases 2, 3:
+                    if root.nodes[dir].nodes[dir].is_red:
+                        root = self.rot_1(root, not dir)
+                    elif root.nodes[dir].nodes[not dir].is_red:
+                        root = self.rot_2(root, not dir)
+
         return root
 
     def insert(self, data):
         self.root = self.insert_red_node(self.root, data)
         self.root.is_red = False
+        return True
 
 class RBNode(object):
     '''
@@ -91,7 +107,7 @@ class RBNode(object):
     def __init__(self, data=None):
         self.is_red = False
         self.data = data
-        self.nodes = [] # 2 nodes: left ([0]) & right ([1])
+        self.nodes = [] # 2 nodes: left ([L=0]) & right ([R=1])
 
     def __repr__(self):
         pat = '(%s) = %s'
