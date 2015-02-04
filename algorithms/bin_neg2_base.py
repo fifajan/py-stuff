@@ -20,4 +20,5 @@ def get_bits_neg2(number):
 
 if __name__ == '__main__':
     assert 5 == get_number_neg2([1, 0, 1])
+    assert -111 == get_number_neg2([1, 0, 0, 0, 1, 0, 0, 1])
     assert [0, 1, 0, 0, 1] == get_bits_neg2(14)
