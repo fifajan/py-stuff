@@ -72,12 +72,12 @@ class RBTree(object):
         rn.nodes = [None, None]
         return rn
 
-    def insert_red_node(self, root, data): # TODO: rename to recoursive
+    def insert_recursive(self, root, data):
         if not root:
             root = self.make_red_node(data)
         elif data != root.data:
             dir = root.data < data
-            root.nodes[dir] = self.insert_red_node(root.nodes[dir], data)
+            root.nodes[dir] = self.insert_recursive(root.nodes[dir], data)
 
             # rebalancing:
             if root.nodes[dir].is_red:
@@ -96,11 +96,11 @@ class RBTree(object):
         return root
 
     def insert(self, data):
-        self.root = self.insert_red_node(self.root, data)
+        self.root = self.insert_recursive(self.root, data)
         self.root.is_red = False
         return True
 
-    def remove_red_node(self, root, data, done): # TODO: rename to recoursive
+    def remove_recursive(self, root, data, done):
         if not root:
             done = [1]
         else:
@@ -126,8 +126,8 @@ class RBTree(object):
                     data = heir.data
 
                 dir = root.data < data
-                root.nodes[dir] = self.remove_red_node( # TODO: rename
-                                        root.nodes[dir], data, done)
+                root.nodes[dir] = self.remove_recursive(root.nodes[dir],
+                                                        data, done)
                 if not done:
                     root = self.remove_balance(root, dir, done)
 
@@ -135,7 +135,7 @@ class RBTree(object):
 
     def remove(self, data):
         done = []
-        self.root = remove_red_node(self.root, data, done) # TODO: rename
+        self.root = remove_recursive(self.root, data, done)
         if self.root:
             self.root.is_red = False
 
