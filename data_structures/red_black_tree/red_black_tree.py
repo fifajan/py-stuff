@@ -9,10 +9,10 @@ class RBTree(object):
     http://www.eternallyconfuzzled.com/tuts/datastructures/jsw_tut_rbtree.aspx
     '''
     def __init__(self):
-        self.root = None
+        self.root = BlackNone()
 
     def __repr__(self):
-        return repr(self.root)
+        return self.root.repr_recursive()
 
     def rot_1(self, root, dir):
         '''
@@ -69,7 +69,7 @@ class RBTree(object):
     def make_red_node(self, data):
         rn = RBNode(data)
         rn.is_red = True
-        rn.nodes = [None, None]
+        rn.nodes = [BlackNone(), BlackNone()]
         return rn
 
     def insert_recursive(self, root, data):
@@ -199,5 +199,30 @@ class RBNode(object):
         rc, rd = r.color() if r else 'X', r.data if r else 'None'
         return pat % (self.color(), str(self.data), lc, ld, rc, rd)
 
+    def repr_recursive(self, offset=0):
+        pat = '%s -(%s) = %s'
+        l, r = self.nodes
+        result = pat % (offset * ' ', self.color(), self.data)
+        if l:
+            result += '\n' + l.repr_recursive(offset + 1)
+        if r:
+            result += '\n' + r.repr_recursive(offset + 1)
+        return result
+
     def color(self):
         return 'R' if self.is_red else 'B'
+
+class BlackNone(object):
+    '''
+    Represents None but with False is_red attribute.
+
+    Introduced to fix 'p.nodes[dir].is_red' problems with None node
+    '''
+
+    is_red = False
+
+    def __nonzero__(self):
+        return False
+
+    def __bool__(self):
+        return False
