@@ -200,9 +200,9 @@ class RBNode(object):
         return pat % (self.color(), str(self.data), lc, ld, rc, rd)
 
     def repr_recursive(self, offset=0):
-        pat = '%s -(%s) = %s'
+        pat = '%s(%s) = %s'
         l, r = self.nodes
-        result = pat % (offset * ' ', self.color(), self.data)
+        result = pat % (offset * '-', self.color(), self.data)
         if l:
             result += '\n' + l.repr_recursive(offset + 1)
         if r:
