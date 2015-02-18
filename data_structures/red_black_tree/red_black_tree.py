@@ -141,6 +141,46 @@ class RBTree(object):
 
         return True
 
+    def remove_balance(self root, dir, done):
+        p = root
+        s = root.nodes[not dir]
+
+        if s and (not s.is_red):
+            # Black sibling cases
+            if (not s.nodes[L].is_red) && (not s.nodes[R].is_red):
+                if p.is_red:
+                    done = [True]
+                p.is_red = True
+                s.is_red = True
+            else:
+                save = root.is_red;
+
+                p = self.rot_1(p, dir) if s.nodes[not dir].is_red else (
+                                                        self.rot_2(p, dir))
+                p.is_red = save
+                p.nodes[L].is_red = False
+                p.nodes[R].is_red = False
+                done = [True]
+        elif s.nodes[dir]:
+            # Red sibling cases
+            r = s.nodes[dir]
+
+            if (not r.nodes[L].is_red) && (not r.nodes[R].is_red):
+                p = self.rot_1(p, dir)
+                p.nodes[dir].nodes[not dir].is_red = True
+            else:
+                if r.nodes[dir].is_red:
+                    s.nodes[dir] = self.rot_1(r, not dir)
+                p = self.rot_2(p, dir)
+                s.nodes[dir].is_red = False
+                p.nodes[not dir].is_red = True
+
+            p.is_red = False
+            p.nodes[dir].is_red = False
+            done = [True]
+
+        return p
+
 
 class RBNode(object):
     '''
