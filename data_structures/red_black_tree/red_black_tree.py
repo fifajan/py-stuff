@@ -121,7 +121,6 @@ class RBTree(object):
         else:
             if root.data == data:
                 if BNone in root.nodes:
-                    #print 'in "if BNone in root.nodes:"'
                     save = root.nodes[not root.nodes[L]]
 
                     # case 0:
@@ -131,7 +130,6 @@ class RBTree(object):
                         save.is_red = False
                         done.append(True)
 
-                    #print 'Deleted node!'
                     root = BNone # actual node deletion
 
                     return save
