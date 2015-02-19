@@ -4,16 +4,19 @@
 # $ ./merge_sort_mp.py large_array.txt
 
 # tests:
-#    Num of concurrent processes     Time  (array is 3*10^6 integers text file)
+#    Num of concurrent processes     Time (array is 16*10^6 integers text file)
 # ------------------------------------------
-#                              1     21 s
-#                              2     15 s
+#             (merge_sort.py)  1    135 s
+#                              2     93 s
+#                              4     67 s
+#                              8     68 s
+#                             16     72 s
 
 from sys import argv
 from math import floor
 from multiprocessing import Process, Manager
 
-PROC_N = 2 # number of processes
+PROC_N = 4 # number of processes
 
 def sort_mp(responses, arr):
     responses.append(sort(arr))
@@ -49,8 +52,22 @@ def merge(l, r):
             j += 1
     return res + l[i:] + r[j:]
 
+def final_merge(responses):
+    '''
+    Final merge (1 process)
+    '''
+    mid = len(responses) / 2
+    if mid:
+        l, r = responses[:mid], responses[mid:]
+        if len(l) == len(r) == 1:
+            return merge(l[0], r[0])
+        else:
+            return merge(final_merge(l), final_merge(r))
+    else:
+        return responses
+
 array1 = [int(line) for line in file(argv[1])]
-array2 = array1[::]
+array2 = array1[:]
 
 manager = Manager() 
 responses = manager.list()
@@ -73,8 +90,8 @@ for proc in p:
 for proc in p:
     proc.join()
 
-array1 = merge(*responses[:2])
+array1 = final_merge(responses)
 
 print '- Does this algorithm work correctly? (checking it now...)'
-print '- ' + 'Yes!' if array1 == sorted(array2) else 'Nope!'
+print '- ' + ('Yes!' if array1 == sorted(array2) else 'Nope!')
 
