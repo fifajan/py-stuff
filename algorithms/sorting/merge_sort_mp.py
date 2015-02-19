@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
 # to test it run:
-# $ ./merge_sort_mp.py large.txt
+# $ ./merge_sort_mp.py large_array.txt
 
 # tests:
 #    Num of concurrent processes     Time  (array is 3*10^6 integers text file)
