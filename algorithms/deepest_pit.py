@@ -2,7 +2,7 @@
 
 def deepest_pit(A):
     '''
-    Returns array's A deepest pit in linear time [O(n)].
+    Returns a deepest pit for array A in linear time [O(n)].
     '''
     n = len(A)
  
