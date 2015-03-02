@@ -47,7 +47,7 @@ def choose_pi(r):
     return pis[len(pis)/2]
 
 setrecursionlimit(2**16) # got 'RuntimeError maximum recursion depth' otherwise
-B = A[::]
+B = A[:]
 sort((0, len(A) - 1))
 
 print '- Does this algorithm work correctly? (checking it now...)'

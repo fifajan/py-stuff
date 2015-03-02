@@ -11,6 +11,6 @@
 
 from sys import argv
 
-print '- Does this algorithm work correctly? (checking it now...)'
-print '- ' + 'Yes!' if sort(array1) == sorted(array2) else 'Nope!'
+# print '- Does this algorithm work correctly? (checking it now...)'
+# print '- ' + 'Yes!' if sort(array1) == sorted(array2) else 'Nope!'
 
