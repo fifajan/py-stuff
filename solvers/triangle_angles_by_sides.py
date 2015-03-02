@@ -1,6 +1,6 @@
 from math import acos, degrees
 
-def checkio(a, b, c):
+def angles(a, b, c):
     sides = ((a, b, c), (b, c, a), (c, a, b))
     if not all([a + b > c for a, b, c in sides]):
         return [0, 0, 0]
@@ -10,6 +10,6 @@ def checkio(a, b, c):
 
 #These "asserts" using only for self-checking and not necessary for auto-testing
 if __name__ == '__main__':
-    assert checkio(4, 4, 4) == [60, 60, 60], "All sides are equal"
-    assert checkio(3, 4, 5) == [37, 53, 90], "Egyptian triangle"
-    assert checkio(2, 2, 5) == [0, 0, 0], "It's can not be a triangle"
+    assert angles(4, 4, 4) == [60, 60, 60], "All sides are equal"
+    assert angles(3, 4, 5) == [37, 53, 90], "Egyptian triangle"
+    assert angles(2, 2, 5) == [0, 0, 0], "It's can not be a triangle"
