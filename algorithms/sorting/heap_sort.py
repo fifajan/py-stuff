@@ -35,11 +35,23 @@ class PriorityQueue(object):
 
         self.size += 1
         pos = self.size
-        while pos > 1 and XXXX: # TODO
+        while pos > 1 and heap[pos // 2] > value:
             self.heap[pos] = self.heap[pos // 2]
 
         self.heap[pos] = value
 
+    def percolate_down(self, k):
+        pass # TODO: implement
+
+    def pop_min(self):
+        if self.size == 0:
+            return None
+        else:
+            min = self.heap[1]
+            self.heap[1] = self.heap[self.size]
+            self.size -= 1
+            self.percolate_down(1)
+            return min 
+
 # print '- Does this algorithm work correctly? (checking it now...)'
 # print '- ' + 'Yes!' if sort(array1) == sorted(array2) else 'Nope!'
-
