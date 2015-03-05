@@ -49,9 +49,10 @@ def merge_pretty(l, r):
         res += [lr_min()]
     return res + l + r
 
-array1 = [int(line) for line in file(argv[1])]
-array2 = array1[:]
+if __name__ == '__main__':
+    array1 = [int(line) for line in file(argv[1])]
+    array2 = array1[:]
 
-print '- Does this algorithm work correctly? (checking it now...)'
-print '- ' + 'Yes!' if sort(array1) == sorted(array2) else 'Nope!'
+    print '- Does this algorithm work correctly? (checking it now...)'
+    print '- ' + ('Yes!' if sort(array1) == sorted(array2) else 'Nope!')
 

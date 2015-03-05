@@ -12,8 +12,6 @@
 
 from sys import argv, setrecursionlimit
 
-A = [int(line) for line in file(argv[1])]
-
 def sort(r):
     '''
     Quick Sort implementation.
@@ -46,9 +44,13 @@ def choose_pi(r):
     pis = sorted([fi, mi, li], key = lambda x: A[x])
     return pis[len(pis)/2]
 
-setrecursionlimit(2**16) # got 'RuntimeError maximum recursion depth' otherwise
-B = A[:]
-sort((0, len(A) - 1))
+if __name__ == '__main__':
+    A = [int(line) for line in file(argv[1])]
 
-print '- Does this algorithm work correctly? (checking it now...)'
-print '- ' + 'Yes!' if A == sorted(B) else 'Nope!'
+    setrecursionlimit(2**16) # got 'RuntimeError maximum recursion depth' 
+                             # otherwise
+    B = A[:]
+    sort((0, len(A) - 1))
+
+    print '- Does this algorithm work correctly? (checking it now...)'
+    print '- ' + ('Yes!' if A == sorted(B) else 'Nope!')

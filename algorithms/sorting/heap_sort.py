@@ -107,4 +107,4 @@ if __name__ == '__main__':
     pq = PriorityQueue()
 
     print '- Does this algorithm work correctly? (checking it now...)'
-    print '- ' + 'Yes!' if pq.heap_sort(array1) == sorted(array2) else 'Nope!'
+    print '- ' + ('Yes!' if pq.heap_sort(array1) == sorted(array2) else 'Nope!')

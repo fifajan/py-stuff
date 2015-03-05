@@ -66,32 +66,34 @@ def final_merge(responses):
     else:
         return responses
 
-array1 = [int(line) for line in file(argv[1])]
-array2 = array1[:]
+if __name__ == '__main__':
+    array1 = [int(line) for line in file(argv[1])]
+    array2 = array1[:]
 
-manager = Manager() 
-responses = manager.list()
+    manager = Manager() 
+    responses = manager.list()
 
-l = len(array1)
-step = int(floor(l / PROC_N))
+    l = len(array1)
+    step = int(floor(l / PROC_N))
 
-p = []
-for n in range(PROC_N):
-    if n < PROC_N - 1:
-        proc = Process(target=sort_mp,
+    p = []
+    for n in range(PROC_N):
+        if n < PROC_N - 1:
+            proc = Process(target=sort_mp,
                         args=(responses, array1[n * step : (n + 1) * step],))
-    else:
-        proc = Process(target=sort_mp, args=(responses, array1[n * step :],))
-    p.append(proc)
+        else:
+            proc = Process(target=sort_mp, 
+                           args=(responses, array1[n * step :],))
+        p.append(proc)
 
-for proc in p:
-    proc.start()
+    for proc in p:
+        proc.start()
 
-for proc in p:
-    proc.join()
+    for proc in p:
+        proc.join()
 
-array1 = final_merge(responses)
+    array1 = final_merge(responses)
 
-print '- Does this algorithm work correctly? (checking it now...)'
-print '- ' + ('Yes!' if array1 == sorted(array2) else 'Nope!')
+    print '- Does this algorithm work correctly? (checking it now...)'
+    print '- ' + ('Yes!' if array1 == sorted(array2) else 'Nope!')
 
