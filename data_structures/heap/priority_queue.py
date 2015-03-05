@@ -1,1 +1,1 @@
-algorithms/sorting/heap_sort.py
+../../algorithms/sorting/heap_sort.py
