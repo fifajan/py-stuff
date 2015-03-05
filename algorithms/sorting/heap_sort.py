@@ -6,8 +6,8 @@
 # tests:
 #    Array state     Time     (array is 10^4 integers text file)
 # ---------------------------
-#         random    ? s
-#       inverted    ? s
+#         random    0.2 s
+#       inverted    0.2 s
 
 from sys import argv
 
@@ -23,6 +23,24 @@ class PriorityQueue(object):
         self.size = 0
         # defines if it will be max or min heap:
         self.min_root = True
+
+    def heap_sort(self, array):
+        self.size = len(array)
+        self.heap = [None] + array[:]
+        self.build_heap()
+
+        for i in reversed(range(1, self.size + 1)):
+            tmp = self.heap[i]
+            self.heap[i] = self.heap[1]
+            self.heap[1] = tmp
+            self.size -= 1
+            self.percolate_down(1)
+
+        heap_len_minus_1 = len(self.heap) - 1 
+        for k in range(heap_len_minus_1):
+            array[k] = self.heap[heap_len_minus_1 - k]
+
+        return array
 
     def build_heap(self):
         for k in reversed(range(1, (self.size // 2) + 1)):
@@ -80,5 +98,11 @@ class PriorityQueue(object):
     def __repr__(self):
         return str(self.heap)
 
-# print '- Does this algorithm work correctly? (checking it now...)'
-# print '- ' + 'Yes!' if sort(array1) == sorted(array2) else 'Nope!'
+
+if __name__ == '__main__':
+    array1 = [int(line) for line in file(argv[1])]
+    array2 = array1[:]
+    pq = PriorityQueue()
+
+    print '- Does this algorithm work correctly? (checking it now...)'
+    print '- ' + 'Yes!' if pq.heap_sort(array1) == sorted(array2) else 'Nope!'
