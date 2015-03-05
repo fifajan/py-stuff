@@ -19,9 +19,11 @@ class PriorityQueue(object):
     """
 
     def __init__(self):
+        # 'all heap (binary tree) layers in one array' approach
+        # is used here:
         self.heap = [None, None]
         self.size = 0
-        # defines if it will be max or min heap:
+        # defines if it will be max or min heap (not used at the moment):
         self.min_root = True
 
     def heap_sort(self, array):
