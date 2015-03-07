@@ -51,8 +51,11 @@ class TestBigData(unittest.TestCase):
                     print '*** Not sorted! (algorithm is wrong) ***'
                     curr_int = None
                     break
+                prev_int = curr_int
         if curr_int is not None:
             print '*** Sorted! (algorithm is fine) ***'
+
+        self.assertIsNotNone(curr_int)
 
 if __name__ == '__main__':
     unittest.main()
