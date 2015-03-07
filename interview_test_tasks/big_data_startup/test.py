@@ -8,14 +8,21 @@ from gen_int_arrays import write_int_array_to_text_file
 
 
 class TestBigData(unittest.TestCase):
-    """Here we are going to test our algorithm with 1000 streams (read 
-    from 1000 files) with 8,000 integers in each.
+    """Here we are going to test our algorithm with 100 [k] streams (read 
+    from 100 files) with 2,000 integers in each.
 
-    So total n is 8,000,000 here.
+    So total n is 2,000,000 here.
+
+    With this input algorithm performs about (compared to my implemenations):
+        3 times slower than mergesort;
+      2.5 times slower than quicksort;
+          about the same speed as heapsort;
+      BUT requires only k memory (for the minimum heap).
     """
+
     name_pat = 'i%04i.txt'
-    n_files = 1000
-    n_ints_in_file = 8 * n_files
+    n_files = 100
+    n_ints_in_file = 20000
 
     def setUp(self):
         # create test files:
@@ -29,7 +36,8 @@ class TestBigData(unittest.TestCase):
     def tearDown(self):
         print 'Started deletion of test files (%s)...' % TestBigData.n_files
         for i in range(TestBigData.n_files):
-             rm(TestBigData.name_pat % i)
+            pass
+            rm(TestBigData.name_pat % i)
         print 'Done!'
 
     def test_sort(self):
@@ -54,7 +62,6 @@ class TestBigData(unittest.TestCase):
                 prev_int = curr_int
         if curr_int is not None:
             print '*** Sorted! (algorithm is fine) ***'
-            print res
 
         self.assertIsNotNone(curr_int)
 

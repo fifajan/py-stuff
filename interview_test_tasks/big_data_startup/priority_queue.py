@@ -21,12 +21,18 @@ class PriorityQueue(object):
         self.heap[1:self.size] = old_heap[1:]
 
     def insert(self, value):
+        """value here is always a tuple (i, value).
+        i does not matter in comparison, only value does.
+        """
+        assert len(value) == 2
+        assert int(value[1]) == value[1] and int(value[0]) == value[0]
+
         if self.size == len(self.heap) - 1:
             self.double_size()
 
         self.size += 1
         pos = self.size
-        while pos > 1 and self.heap[pos // 2] > value:
+        while pos > 1 and self.heap[pos // 2][1] > value[1]:
             self.heap[pos] = self.heap[pos // 2]
             pos = pos // 2
 
@@ -39,8 +45,8 @@ class PriorityQueue(object):
         while 2 * k <= self.size:
             child = 2 * k
             child += 1 if child != self.size and (
-                            self.heap[child + 1] < self.heap[child]) else 0
-            if self.heap[child] < tmp:
+                          self.heap[child + 1][1] < self.heap[child][1]) else 0
+            if self.heap[child][1] < tmp[1]:
                 self.heap[k] = self.heap[child]
             else:
                 break

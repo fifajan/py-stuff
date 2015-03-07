@@ -22,6 +22,7 @@ class MyStream(object):
     def __init__(self, filename):
         self.in_file = open(filename)
         self.iterator = self.__iter__()
+        self.empty = False
 
     def __iter__(self):
         line = ' '
@@ -37,6 +38,7 @@ class MyStream(object):
         try:
             return next(self.iterator)
         except StopIteration:
+            self.empty = True
             return None
                     
 def merge_streams(streams):
@@ -45,36 +47,37 @@ def merge_streams(streams):
     :return: sorted list of integers.
     """
 
-    priority_buffer = PriorityQueue()
+    min_buffer = PriorityQueue()
     all_streams_are_empty = False
-    empty_stream = False
     iterations = 0
+    next_i = None
     while not all_streams_are_empty:
-         all_streams_are_empty = True
-         for stream in streams:
-            new_int = stream.pop()
-            empty_stream = new_int is None
-            while not empty_stream:
-                priority_buffer.insert(new_int)
+        all_streams_are_empty = True
+        for i, stream in enumerate(streams):
+            while not stream.empty:
+                if (next_i is not None) and i != next_i:
+                    break
+
+                new_int = stream.pop()
+
+                if new_int is not None:
+                    min_buffer.insert((i, new_int))
                 if iterations < 1: # first step is to get the top
                                    # "layer" of all streams
                     break
                 else: # if we already have our top "layer" 
                       # we will run the main sorting algorithm
-                    min_int = priority_buffer.pop_min()
+                    next_i, min_int = min_buffer.pop_min()
                     yield min_int # return minimums one by one
-                    iterations += 1
-                    if new_int == min_int:
-                        new_int = stream.pop()
-                    else:
-                        break # go to the next stream
-            all_streams_are_empty = all_streams_are_empty and empty_stream
+                    next_i = None if streams[next_i].empty else next_i
 
-    if iterations:
-        print ('DEBUG: heap (list) of real size == %s were allocated '
-               'during sorting.' % len(priority_buffer.heap))
+            all_streams_are_empty = all_streams_are_empty and stream.empty
+        iterations += 1
 
-    while len(priority_buffer): # when all streams became empty
+    while len(min_buffer): # when all streams became empty
                                 # we just ineratively pop all heap content
-        yield priority_buffer.pop_min()
+        yield min_buffer.pop_min()
+
+    print ('DEBUG: heap (list) of real size == %s were allocated '
+           'during sorting.' % len(min_buffer.heap))
 
