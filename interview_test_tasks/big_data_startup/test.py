@@ -54,6 +54,7 @@ class TestBigData(unittest.TestCase):
                 prev_int = curr_int
         if curr_int is not None:
             print '*** Sorted! (algorithm is fine) ***'
+            print res
 
         self.assertIsNotNone(curr_int)
 

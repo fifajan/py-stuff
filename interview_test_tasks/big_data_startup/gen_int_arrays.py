@@ -4,10 +4,13 @@ from sys import argv
 import random as rand
 
 def write_int_array_to_text_file(filename, lenght=100, do_stuffle=False):
-    offset_range = range(-1000, 1001)
+    offset_range = range(-lenght, lenght + 1)
     offset = rand.choice(offset_range)
 
-    int_list = range(offset, lenght + offset)
+    abs_offset = abs(offset)
+    half_abs_offset_range = range(abs_offset // 2)
+    int_list = [_int + i*abs_offset + rand.choice(half_abs_offset_range) for (
+                    i, _int) in enumerate(range(offset, lenght + offset))]
     if do_stuffle:
         rand.shuffle(int_list)
 
