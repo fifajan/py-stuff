@@ -6,7 +6,52 @@ class DijkstrasMazeSolver(object):
     def __init__(self, input_maze=None, is_graph=False):
         pass
 
+class MazeToGraphConverter(object):
+    """Converts 0/1 matrix maze to simplified graph perpesentation.
+    f.e.:
+
+    maze = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+        [1,(N),0, 0, 0, 1, 1, 1, 0, 1, 1, 1],    N = 0
+        [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        [1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    ]
+
+                                        Simplified graph:
+
+                                                    (D) 
+    Simplified maze (graph inside):                  #
+                                                     #
+    +----------------+-------------+                 #
+    |(A)############ | ########### |    (A)###(B)###(C)
+    |   +--------+ # + # +-----+ # |                 #
+    |             (B)#(C)| ####### |                 #
+    +----------------+ # | # +-----+                 #
+    |                |(D)|(F)###(J)|    (L)   (J)###(F)
+    |   +--------+   +---+ # +-----+     #           # 
+    |     (O)#(P)#(K)####### |           #           #
+    +----+ # + # + # +-------+           #           #
+         | # | # | # |                  (O)###(P)###(K)###(N)
+         |(L)|(M)|(N)|                         #
+         +---+---+---+                         #
+                                               #
+                                              (M)
+    """
+    def __init__(self, maze):
+        pass
+
     def maze_matrix_to_graph(maze):
+        """Simplifies graph (merge edges / remove vertex) if possible."""
+        self.maze_height = len(maze)
+        self.maze_width = len(maze[0])
         pass
 
     def near_cells(self, x, y):
@@ -19,13 +64,14 @@ class DijkstrasMazeSolver(object):
 
     def can_go(self, x, y, direction):
         x1, y1 = self.near_cells(x, y)[direction]
-        if 0 <= x1 <= self.maze_width and 0 <= self.maze_height <= 11:
+        if 0 <= x1 < self.maze_width and 0 <= y1 < self.maze_height:
             return self.maze[y1][x1] == 0
         else:
             return False
 
     def possible_moves(self, x, y):
         return ''.join([d for d in 'URLD' if self.can_go(x, y, d)])
+
 
 
 class MazeSolver:
@@ -154,41 +200,3 @@ if __name__ == '__main__':
         [1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ]))
-
-
-
-#    maze = [
-#        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-#        [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-#        [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-#        [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-#        [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
-#        [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-#        [1,(N),0, 0, 0, 1, 1, 1, 0, 1, 1, 1],    N = 0
-#        [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-#        [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
-#        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-#        [1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
-#        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-#    ]
-#
-#                                        Simplified graph:
-#
-#                                                    (D) 
-#    Simplified maze (graph inside):                  #
-#                                                     #
-#    +----------------+-------------+                 #
-#    |(A)############ | ########### |    (A)###(B)###(C)
-#    |   +--------+ # + # +-----+ # |                 #
-#    |             (B)#(C)| ####### |                 #
-#    +----------------+ # | # +-----+                 #
-#    |                |(D)|(F)###(J)|    (L)   (J)###(F)
-#    |   +--------+   +---+ # +-----+     #           # 
-#    |     (O)#(P)#(K)####### |           #           #
-#    +----+ # + # + # +-------+           #           #
-#         | # | # | # |                  (O)###(P)###(K)###(N)
-#         |(L)|(M)|(N)|                         #
-#         +---+---+---+                         #
-#                                               #
-#                                              (M)
-#
