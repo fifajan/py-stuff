@@ -2,14 +2,16 @@
 
 class DijkstrasMazeSolver(object):
     """Gets shortest maze path with help of Dijkstras algorithm.
-    It converts 0/1 matrix maze to graph representation
-    and then finds shortest path. Also it uses Heap data structure.
+    It converts 0/1 matrix maze to edge weighted graph representation
+    (due to MazeToGraphConverter) and then finds shortest path.
+    Also it uses Heap data structure to quickly get minimums.
     """
     def __init__(self, input_maze=None, is_graph=False):
         pass
 
 class MazeToGraphConverter(object):
-    """Converts 0/1 matrix maze to simplified graph perpesentation.
+    """Converts 0/1 matrix maze to simplified edge weighted graph
+    perpesentation.
     f.e.:
 
     maze = [
@@ -19,7 +21,7 @@ class MazeToGraphConverter(object):
         [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
         [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-        [1,(N),0, 0, 0, 1, 1, 1, 0, 1, 1, 1],    N = 0
+        [1,(E),0, 0, 0, 1, 1, 1, 0, 1, 1, 1],   (E) = 0: exit cell
         [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
@@ -42,10 +44,10 @@ class MazeToGraphConverter(object):
     |(Q)##(O)#(P)#(K)####### |              #           #
     +----+ # + # + # +-------+              #           #
          | # | # | # |                     (O)###(P)###(K)
-         |(L)|(M)|(N)|                      #     #     #
+         |(L)|(M)|(E)|                      #     #     #
          +---+---+---+                      #     #     #
                                             #     #     #
-                                           (L)   (M)   (N)
+                                           (L)   (M)   (E) <-- exit vertex
     """
     def __init__(self, maze):
         self.graph_vertices = set()
