@@ -7,7 +7,15 @@ class DijkstrasMazeSolver(object):
     Also it uses Heap data structure to quickly get minimums.
     """
     def __init__(self, input_maze=None, is_graph=False):
+        if not is_graph:
+            converter = MazeToGraphConverter(input_maze)
+            self.vertices = converter.greph_vertices
+            self.edge_weights = converter.greph_edge_weights
+
+    def shortest_path(self):
         pass
+
+
 
 class MazeToGraphConverter(object):
     """Converts 0/1 matrix maze to simplified edge weighted graph
@@ -21,12 +29,27 @@ class MazeToGraphConverter(object):
         [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
         [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-        [1,(E),0, 0, 0, 1, 1, 1, 0, 1, 1, 1],   (E) = 0: exit cell
+        [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1],
         [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
         [1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    ]
+
+    maze_with_nodes = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1,(A),0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        [1, 0, 0, 0,(B),0,(C),1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
+        [1,(E),0, 0, 0, 1, 1, 1, 0, 1, 1, 1],   (E) = 0: exit cell
+        [1, 1, 1, 1,(K),0, 0, 0,(F),0, 0, 1],
+        [1,(Q),1, 1, 0, 1, 1, 1, 1, 1,(J),1],    Nodes are:
+        [1,(O),0, 0,(P),0, 0, 0, 0, 1, 1, 1],     - start point;
+        [1,(L),1, 1, 1, 1, 1, 1, 0, 0,(M),1],     - dead ends;
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],     - 3 and 4 way crossings.
     ]
 
                                            Simplified graph:
@@ -55,10 +78,7 @@ class MazeToGraphConverter(object):
         self.maze_height = len(maze)
         self.maze_width = len(maze[0])
         self.maze = maze
-
-    def maze_matrix_to_graph(maze):
-        """Simplifies graph (merge edges / remove vertex) if possible."""
-        pass
+        self.make_graph(1, 1, ((1, 1),))
 
     def near_cells(self, x, y):
         return {
