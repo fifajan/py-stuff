@@ -1,3 +1,33 @@
+class DijkstrasMazeSolver(object):
+    """Gets shortest maze path with help of Dijkstras algorithm.
+    It converts 0/1 matrix maze to graph representation
+    and then finds shortest path. Also it uses Heap data structure.
+    """
+    def __init__(self, input_maze=None, is_graph=False):
+        pass
+
+    def maze_matrix_to_graph(maze):
+        pass
+
+    def near_cells(self, x, y):
+        return {
+            'U' : (x, y - 1), # up
+            'R' : (x + 1, y), # right
+            'D' : (x, y + 1), # down
+            'L' : (x - 1, y)  # left
+        }
+
+    def can_go(self, x, y, direction):
+        x1, y1 = self.near_cells(x, y)[direction]
+        if 0 <= x1 <= self.maze_width and 0 <= self.maze_height <= 11:
+            return self.maze[y1][x1] == 0
+        else:
+            return False
+
+    def possible_moves(self, x, y):
+        return ''.join([d for d in 'URLD' if self.can_go(x, y, d)])
+
+
 class MazeSolver:
     '''
     Recursively calculates exit routes without "turing back".
@@ -142,7 +172,7 @@ if __name__ == '__main__':
 #        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 #    ]
 #
-#                                            Simplified graph:
+#                                        Simplified graph:
 #
 #                                                    (D) 
 #    Simplified maze (graph inside):                  #
