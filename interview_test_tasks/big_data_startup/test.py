@@ -40,7 +40,6 @@ class TestBigData(unittest.TestCase):
     def tearDown(self):
         print 'Started deletion of test files (%s)...' % TestBigData.n_files
         for i in range(TestBigData.n_files):
-            pass
             rm(TestBigData.name_pat % i)
         print 'Done!'
 
