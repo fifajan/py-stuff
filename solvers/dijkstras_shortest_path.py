@@ -49,7 +49,7 @@ class MazeToGraphConverter(object):
     """
     def __init__(self, maze):
         self.graph_vertices = set()
-        self.graph_edge_weighs = dict() # weighted edges
+        self.graph_edge_weights = dict() # weighted edges
         self.maze_height = len(maze)
         self.maze_width = len(maze[0])
         self.maze = maze
@@ -77,20 +77,18 @@ class MazeToGraphConverter(object):
         return ''.join([d for d in 'URLD' if self.can_go(x, y, d)])
 
     def make_graph(self, x, y, visited):
-        #if not visited: # start vertex
-        #    self.graph_vertices.add((x, y))
         possible_moves = self.possible_moves(x, y)
-        if (not visited # start vertex
+        if (len(visited) == 1 # start vertex
                 ) or len(possible_moves) in (
                     1,  # dead end
                     3,  # 3-way crossing
                     4): # 4-way crossing
             self.graph_vertices.add((x, y))
             for i, (x1, y1) in enumerate(visited):
-                if (x1, y1) in self.graph_vertices:
+                if (x, y) != (x1, y1) and (x1, y1) in self.graph_vertices:
                     edge = frozenset([(x, y), (x1, y1)])
-                    self.graph_edge_weights[edge] = (
-                                        self.graph.get(edge, 0) + i + 1)
+                    if not edge in self.graph_edge_weights:
+                        self.graph_edge_weights[edge] = i + 1
                     break
         for move in possible_moves:
             cell = self.near_cells(x, y)[move]
@@ -99,76 +97,6 @@ class MazeToGraphConverter(object):
                 visited = ((x, y),) + visited
                 xc, yc = cell
                 self.make_graph(xc, yc, visited)
-                    
-
-    '''
-        if not self.found or self.search_all:
-            for move in self.possible_moves(x, y):
-                cell = self.near_cells(x, y)[move]
-                if cell not in visited:
-                    _route = route + [move]
-                    _visited = visited + [cell]
-                    # WIN!
-                    if cell == (10, 10):
-                        self.found = True
-                        self.routes.append(''.join(_route))
-                    else:
-                        self.make_route(cell[0], cell[1], _route, _visited)
-    '''
-
-class MazeSolver:
-    '''
-    Recursively calculates exit routes without "turing back".
-    if 'search_all' is set it will produce multiple exit routes but can cause
-    an infinite loop.
-    '''
-
-    def __init__(self, maze, search_all = False):
-        self.maze = maze
-        self.routes = []
-        self.search_all = search_all
-        self.found = False
-
-    def near_cells(self, x, y):
-        return {
-            'N' : (x, y - 1),
-            'E' : (x + 1, y),
-            'S' : (x, y + 1),
-            'W' : (x - 1, y)
-        }
-
-    def can_go(self, x, y, direction):
-        x1, y1 = self.near_cells(x, y)[direction]
-        if 0 <= x1 <= 11 and 0 <= y1 <= 11:
-            return self.maze[y1][x1] == 0
-        else:
-            return False
-
-    def possible_moves(self, x, y):
-        return ''.join([d for d in 'ENSW' if self.can_go(x, y, d)])
-
-    def make_route(self, x, y, route, visited):
-        if not self.found or self.search_all:
-            for move in self.possible_moves(x, y):
-                cell = self.near_cells(x, y)[move]
-                if cell not in visited:
-                    _route = route + [move]
-                    _visited = visited + [cell]
-                    # WIN!
-                    if cell == (10, 10):
-                        self.found = True
-                        self.routes.append(''.join(_route))
-                    else:
-                        self.make_route(cell[0], cell[1], _route, _visited)
-                        
-    def solve(self):
-        if not self.routes:
-            self.make_route(1, 1, [], [(1, 1)])
-        # return shortest
-        return min(self.routes, key = len)
-        
-def solve_maze(data):
-    return MazeSolver(data).solve()
 
 #This code using only for self-checking and not necessary for auto-testing
 if __name__ == '__main__':
@@ -191,6 +119,7 @@ if __name__ == '__main__':
     m2g = MazeToGraphConverter(maze)
     m2g.make_graph(1, 1, ((1, 1),))
     print m2g.graph_vertices
+    print m2g.graph_edge_weights
 
 
     '''
