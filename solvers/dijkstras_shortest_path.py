@@ -27,12 +27,12 @@ class MazeToGraphConverter(object):
 
     maze = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],   (1, 1) = 0 <-- start cell
         [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
         [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
         [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1],
+        [1, 2, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1],    2 <-- exit cell
         [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
@@ -47,7 +47,7 @@ class MazeToGraphConverter(object):
         [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
         [1, 0, 0, 0,(B),0,(C),1, 1, 1, 0, 1],
         [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-        [1,(E),0, 0, 0, 1, 1, 1, 0, 1, 1, 1],   (E) = 0: exit cell
+        [1,(E),0, 0, 0, 1, 1, 1, 0, 1, 1, 1],   (E) = 2: exit cell
         [1, 1, 1, 1,(K),0, 0, 0,(F),0, 0, 1],
         [1,(Q),1, 1, 0, 1, 1, 1, 1, 1,(J),1],    Nodes are:
         [1,(O),0, 0,(P),0, 0, 0, 0, 1, 1, 1],     - start cell;
@@ -114,7 +114,8 @@ class MazeToGraphConverter(object):
             for i, (x1, y1) in enumerate(visited):
                 if (x, y) != (x1, y1) and (x1, y1) in self.graph_vertices:
                     edge = frozenset([(x, y), (x1, y1)])
-                    if not edge in self.graph_edge_weights:
+                    if (not edge in self.graph_edge_weights) or (
+                                    self.graph_edge_weights[edge] > i + 1):
                         self.graph_edge_weights[edge] = i + 1
                     break
         for move in possible_moves:
