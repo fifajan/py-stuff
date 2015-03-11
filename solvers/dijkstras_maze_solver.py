@@ -17,7 +17,7 @@ class DijkstrasMazeSolver(object):
             print self.adjacency_list
 
     def shortest_path(self):
-        pass
+        
 
 class MazeToGraphConverter(object):
     """Converts 0/1 matrix maze to simplified edge weighted graph
@@ -83,6 +83,7 @@ class MazeToGraphConverter(object):
         self.maze_width = len(maze[0])
         self.maze = maze
         self.start_cell = start_cell
+        self.exit_cell = None
         self.make_graph()
 
     def near_cells(self, x, y):
@@ -104,6 +105,8 @@ class MazeToGraphConverter(object):
         return ''.join([d for d in 'URLD' if self.can_go(x, y, d)])
 
     def make_vertices_and_edges(self, x, y, visited):
+        if not self.exit_cell and self.maze[y][x] > 1:
+            self.exit_cell = (x, y)
         possible_moves = self.possible_moves(x, y)
         if (len(visited) == 1 # start vertex
                 ) or len(possible_moves) in (
@@ -135,6 +138,8 @@ class MazeToGraphConverter(object):
     def make_graph(self):
         start = self.start_cell
         self.make_vertices_and_edges(*start, visited=(start,))
+        if not self.exit_cell:
+            raise Exception('Exit cell (2) not found in maze!')
         self.make_adjacency_list()
 
 
