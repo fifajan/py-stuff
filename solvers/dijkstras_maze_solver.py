@@ -3,7 +3,7 @@
 from heap import PriorityQueue
 
 class DijkstrasMazeSolver(object):
-    """Gets shortest maze path with help of Dijkstras algorithm.
+    """Gets shortest maze exit path with help of Dijkstras algorithm.
     It converts 0/1 matrix maze to edge weighted graph representation
     (due to MazeToGraphConverter) and then finds shortest path.
     Also it uses Heap data structure to quickly get minimums.
@@ -16,14 +16,27 @@ class DijkstrasMazeSolver(object):
             self.vertices = converter.graph_vertices
             self.edge_weights = converter.graph_edge_weights
             self.adjacency_list = converter.graph_adjacency_list
+            self.start_v = converter.start_cell
+            self.exit_v = converter.exit_cell
             self.dist = dict()
             self.prev = dict()
             self.queue = PriorityQueue()
-            print self.vertices
-            print self.edge_weights
-            print self.adjacency_list
+            self.shortest_path = self.shortest_exit_path()
 
-    def shortest_path(self, source):
+    def shortest_exit_path(self):
+        self.count_shortest_paths(self.start_v)
+        length = self.dist[self.exit_v]
+        path = self.get_path(self.exit_v)
+        return path, length
+                
+    def get_path(self, v, path=()):
+        path = (v,) + path 
+        if self.prev[v] and v != self.start_v:
+            return self.get_path(self.prev[v], path)
+        else:
+            return path
+         
+    def count_shortest_paths(self, source):
         self.dist[source] = 0
         self.prev[source] = None
 
@@ -33,28 +46,21 @@ class DijkstrasMazeSolver(object):
                 self.prev[v] = None
             else:
                 self.queue.insert((v, self.dist[v]))
-        # print self.queue
 
         while self.queue:
             u = self.queue.pop_min()[0]
-            # print u
             for v in self.adjacency_list[u]:
                 edge = frozenset((u, v))
-                # print edge
                 alt = self.dist[u] + self.edge_weights[edge]
-                print u, v, edge, alt
                 if alt < self.dist[v]:
                     self.dist[v] = alt
                     self.queue.insert((v, alt))
                     self.prev[v] = u
 
-        return self.dist, self.prev
-
-        
 
 class MazeToGraphConverter(object):
     """Converts 0/1 matrix maze to simplified edge weighted graph
-    perpesentation.
+    representation.
 
     11x11 maze example:
 
@@ -189,9 +195,8 @@ class MazeToGraphConverter(object):
         self.make_adjacency_list()
 
 
-#This code using only for self-checking and not necessary for auto-testing
 if __name__ == '__main__':
-
+    # example from MazeToGraphConverter's docstr:
     maze = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
@@ -207,11 +212,10 @@ if __name__ == '__main__':
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ]
 
-    d = DijkstrasMazeSolver(maze)
-    print d.shortest_path((1, 1))
+    assert DijkstrasMazeSolver(maze).shortest_path == (
+            ((1, 1), (4, 4), (6, 4), (8, 7), (4, 7), (1, 6)), 31) # path, len
 
-    '''
-    print(solve_maze([
+    maze = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
@@ -222,63 +226,26 @@ if __name__ == '__main__':
         [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1],
         [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]))
-    print(solve_maze([
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
-        [1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]))
-    #be careful with infinity loop
-    print(solve_maze([
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]))
-    print(solve_maze([
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1],
-        [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1],
-        [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1],
-        [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1],
-        [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    ]))
-    print(solve_maze([
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1],
-        [1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]))
-'''
+    ]
+
+    assert DijkstrasMazeSolver(maze).shortest_path == (
+            ((1, 1), (1, 6), (3, 6), (4, 7), (6, 7), (8, 8), (10, 10)), 18)
+
+    # TODO: handle this case ->
+    # one room maze (infinite loop test)
+    # maze = [
+    #     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1],
+    #     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    # ]
