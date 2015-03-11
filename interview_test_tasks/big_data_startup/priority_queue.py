@@ -25,7 +25,7 @@ class PriorityQueue(object):
         i does not matter in comparison, only value does.
         """
         assert len(value) == 2
-        assert int(value[1]) == value[1] and int(value[0]) == value[0]
+        # assert int(value[1]) == value[1] and int(value[0]) == value[0]
 
         if self.size == len(self.heap) - 1:
             self.double_size()
