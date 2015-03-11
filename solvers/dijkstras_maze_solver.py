@@ -1,22 +1,37 @@
 #! /usr/bin/python
 
+from heap import PriorityQueue
+
 class DijkstrasMazeSolver(object):
     """Gets shortest maze path with help of Dijkstras algorithm.
     It converts 0/1 matrix maze to edge weighted graph representation
     (due to MazeToGraphConverter) and then finds shortest path.
     Also it uses Heap data structure to quickly get minimums.
     """
+    infinity = 10**10
+
     def __init__(self, input_maze=None, is_graph=False):
         if not is_graph:
             converter = MazeToGraphConverter(input_maze)
             self.vertices = converter.graph_vertices
             self.edge_weights = converter.graph_edge_weights
             self.adjacency_list = converter.graph_adjacency_list
+            self.dist = dict()
+            self.prev = dict()
+            self.queue = PriorityQueue()
             print self.vertices
             print self.edge_weights
             print self.adjacency_list
 
-    def shortest_path(self):
+    def shortest_path(self, source):
+        dist[source] = 0
+        prev[source] = None
+
+        for v in self.adjacency_list:
+            if v != source:
+                dist[v] = self.infinity
+                prev[v] = None
+
         
 
 class MazeToGraphConverter(object):
@@ -97,7 +112,7 @@ class MazeToGraphConverter(object):
     def can_go(self, x, y, direction):
         x1, y1 = self.near_cells(x, y)[direction]
         if 0 <= x1 < self.maze_width and 0 <= y1 < self.maze_height:
-            return self.maze[y1][x1] == 0
+            return self.maze[y1][x1] != 1
         else:
             return False
 
@@ -153,7 +168,7 @@ if __name__ == '__main__':
         [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
         [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-        [1, 0 ,0, 0, 0, 1, 1, 1, 0, 1, 1, 1],
+        [1, 2 ,0, 0, 0, 1, 1, 1, 0, 1, 1, 1],
         [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
