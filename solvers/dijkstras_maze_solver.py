@@ -24,13 +24,31 @@ class DijkstrasMazeSolver(object):
             print self.adjacency_list
 
     def shortest_path(self, source):
-        dist[source] = 0
-        prev[source] = None
+        self.dist[source] = 0
+        self.prev[source] = None
 
-        for v in self.adjacency_list:
+        for v in self.vertices:
             if v != source:
-                dist[v] = self.infinity
-                prev[v] = None
+                self.dist[v] = self.infinity
+                self.prev[v] = None
+            else:
+                self.queue.insert((v, self.dist[v]))
+        # print self.queue
+
+        while self.queue:
+            u = self.queue.pop_min()[0]
+            # print u
+            for v in self.adjacency_list[u]:
+                edge = frozenset((u, v))
+                # print edge
+                alt = self.dist[u] + self.edge_weights[edge]
+                print u, v, edge, alt
+                if alt < self.dist[v]:
+                    self.dist[v] = alt
+                    self.queue.insert((v, alt))
+                    self.prev[v] = u
+
+        return self.dist, self.prev
 
         
 
@@ -47,7 +65,7 @@ class MazeToGraphConverter(object):
         [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
         [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-        [1, 2, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1],    2 <-- exit cell
+        [1, 2, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1],   (1, 6) = 2 <-- exit cell
         [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
@@ -57,18 +75,22 @@ class MazeToGraphConverter(object):
 
     maze_with_nodes = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1,(A),0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+        [1,(A),0, 0, 0, 1, 0, 0, 0, 0, 0, 1],   (A) = (1, 1) <-- start cell
         [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
         [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 0, 0,(B),0,(C),1, 1, 1, 0, 1],
+        [1, 0, 0, 0,(B),0,(C),1, 1, 1, 0, 1],   (B) = (4, 4); (C) = (6, 4)
         [1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-        [1,(E),0, 0, 0, 1, 1, 1, 0, 1, 1, 1],   (E) = 2: exit cell
-        [1, 1, 1, 1,(K),0, 0, 0,(F),0, 0, 1],
-        [1,(Q),1, 1, 0, 1, 1, 1, 1, 1,(J),1],    Nodes are:
-        [1,(O),0, 0,(P),0, 0, 0, 0, 1, 1, 1],     - start cell;
-        [1,(L),1, 1, 1, 1, 1, 1, 0, 0,(M),1],     - dead end cells;
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],     - 3 and 4 way crossings.
-    ]
+        [1,(E),0, 0, 0, 1, 1, 1, 0, 1, 1, 1],   (E) = (1, 6) <-- exit cell
+        [1, 1, 1, 1,(K),0, 0, 0,(F),0, 0, 1],   (K) = (4, 7); (F) = (8, 7)
+        [1,(Q),1, 1, 0, 1, 1, 1, 1, 1,(J),1],   (Q) = (1, 8); (J) = (10, 8)
+        [1,(O),0, 0,(P),0, 0, 0, 0, 1, 1, 1],   (O) = (1, 9); (P) = (4, 9)
+        [1,(L),1, 1, 1, 1, 1, 1, 0, 0,(M),1],   (L) = (1, 10); (M) = (10, 10)
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  
+    ]                                            Nodes are:
+                                                    - start cell;
+                                                    - dead end cells;
+                                                    - 3 and 4 way crossings.
+
 
                                            Simplified weighted graph:
 
@@ -89,6 +111,15 @@ class MazeToGraphConverter(object):
          +---+---+---+                      #     #     #
                                             #     #     #
                                            (L)   (M)   (E) <-- exit vertex
+
+
+    So the shortest (A) -> (E) path will      be      of      TOTAL LENGTH:
+
+         (A)  ->  (B)  ->  (C)  ->  (F)  ->  (K)  ->  (E)          ||
+    [or]                                                           ||
+        (1,1) -> (4,4) -> (6,4) -> (8,7) -> (4,7) -> (1,6)         ||
+    [edge     ||       ||       ||       ||       ||
+     weights]: 6   +    2   +   15   +    4    +   4       =       31 
     """
     def __init__(self, maze, start_cell=(1, 1)):
         self.graph_vertices = set()
@@ -177,6 +208,7 @@ if __name__ == '__main__':
     ]
 
     d = DijkstrasMazeSolver(maze)
+    print d.shortest_path((1, 1))
 
     '''
     print(solve_maze([
