@@ -9,18 +9,21 @@ class DijkstrasMazeSolver(object):
     def __init__(self, input_maze=None, is_graph=False):
         if not is_graph:
             converter = MazeToGraphConverter(input_maze)
-            self.vertices = converter.greph_vertices
-            self.edge_weights = converter.greph_edge_weights
+            self.vertices = converter.graph_vertices
+            self.edge_weights = converter.graph_edge_weights
+            self.adjacency_list = converter.graph_adjacency_list
+            print self.vertices
+            print self.edge_weights
+            print self.adjacency_list
 
     def shortest_path(self):
         pass
 
-
-
 class MazeToGraphConverter(object):
     """Converts 0/1 matrix maze to simplified edge weighted graph
     perpesentation.
-    f.e.:
+
+    11x11 maze example:
 
     maze = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -72,13 +75,15 @@ class MazeToGraphConverter(object):
                                             #     #     #
                                            (L)   (M)   (E) <-- exit vertex
     """
-    def __init__(self, maze):
+    def __init__(self, maze, start_cell=(1, 1)):
         self.graph_vertices = set()
         self.graph_edge_weights = dict() # weighted edges
+        self.graph_adjacency_list = dict()
         self.maze_height = len(maze)
         self.maze_width = len(maze[0])
         self.maze = maze
-        self.make_graph(1, 1, ((1, 1),))
+        self.start_cell = start_cell
+        self.make_graph()
 
     def near_cells(self, x, y):
         return {
@@ -98,7 +103,7 @@ class MazeToGraphConverter(object):
     def possible_moves(self, x, y):
         return ''.join([d for d in 'URLD' if self.can_go(x, y, d)])
 
-    def make_graph(self, x, y, visited):
+    def make_vertices_and_edges(self, x, y, visited):
         possible_moves = self.possible_moves(x, y)
         if (len(visited) == 1 # start vertex
                 ) or len(possible_moves) in (
@@ -114,11 +119,23 @@ class MazeToGraphConverter(object):
                     break
         for move in possible_moves:
             cell = self.near_cells(x, y)[move]
-            # print visited
             if cell not in visited:
                 visited = ((x, y),) + visited
-                xc, yc = cell
-                self.make_graph(xc, yc, visited)
+                self.make_vertices_and_edges(*cell, visited=visited)
+
+    def make_adjacency_list(self):
+        for v in self.graph_vertices:
+            for e in self.graph_edge_weights:
+                if v in e:
+                    u = set(e - {v}).pop()
+                    self.graph_adjacency_list[v] = (
+                                self.graph_adjacency_list.get(v, []) + [u])
+
+    def make_graph(self):
+        start = self.start_cell
+        self.make_vertices_and_edges(*start, visited=(start,))
+        self.make_adjacency_list()
+
 
 #This code using only for self-checking and not necessary for auto-testing
 if __name__ == '__main__':
@@ -138,11 +155,7 @@ if __name__ == '__main__':
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ]
 
-    m2g = MazeToGraphConverter(maze)
-    m2g.make_graph(1, 1, ((1, 1),))
-    print m2g.graph_vertices
-    print m2g.graph_edge_weights
-
+    d = DijkstrasMazeSolver(maze)
 
     '''
     print(solve_maze([
