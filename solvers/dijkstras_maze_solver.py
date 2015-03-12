@@ -254,6 +254,10 @@ if __name__ == '__main__':
     assert DijkstrasMazeSolver(maze).shortest_path == (
                 ((2, 1), (2, 5), (2, 8), (4, 8)), 15) # path, len(path)
 
+    # COOL (!!) example:
+    # All chars not in {' ', 'S', 'E'} like "wall" (-,=), "corner" (+),
+    #    "water" (~), "monster" in South-West, etc will become obstacles
+    #    (1) in 1/0 matrix.
     # takes a bit long time due to rooms
     maze = ('XXX+-+-----------------------+\n'
             'XXX| |                       |\n'
