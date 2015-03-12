@@ -21,8 +21,8 @@ class PriorityQueue(object):
         self.heap[1:self.size] = old_heap[1:]
 
     def insert(self, value):
-        """value here is always a tuple (i, value).
-        i does not matter in comparison, only value does.
+        """value here is always a tuple (val, key).
+        val does not matter in comparison, only key does.
         """
         assert len(value) == 2
         # assert int(value[1]) == value[1] and int(value[0]) == value[0]
