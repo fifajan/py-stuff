@@ -318,14 +318,9 @@ if __name__ == '__main__':
         [1, 0, 0, 0, 2, 1],
         [1, 1, 1, 1, 1, 1],
     ]
-    # somehow result differs on my different computer architectures.
-    # TODO: figure out why
-    # for Python 2.7.3 on x86_64:
     assert DijkstrasMazeSolver(maze).shortest_path == (
-        ((1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 6), (3, 6), (4, 6)), 8)
-    # for Python 2.7.8 on i386:
-    # (((1, 1), (2, 1), (2, 2), (2, 3), (3, 3),
-    #   (3, 4), (3, 5), (3, 6), (4, 6)), 8)
+                    ((1, 1), (2, 1), (2, 2), (2, 3), (3, 3),
+                     (3, 4), (3, 5), (3, 6), (4, 6)), 8)
 
     # one room maze with walls (infinite loop test)
     maze = [
@@ -338,10 +333,5 @@ if __name__ == '__main__':
         [1, 0, 1, 0, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1],
     ]
-    # somehow result differs on my different computer architectures.
-    # TODO: figure out why
-    # for Python 2.7.3 on x86_64:
     assert DijkstrasMazeSolver(maze).shortest_path == (
-        ((1, 1), (1, 2), (1, 3), (2, 3), (3, 3), (4, 3), (4, 2), (5, 1)), 8)
-    # for Python 2.7.8 on i386:
-    # (((1, 1), (2, 2), (2, 3), (3, 3), (4, 3), (4, 2), (5, 1)), 8)
+                ((1, 1), (2, 2), (2, 3), (3, 3), (4, 3), (4, 2), (5, 1)), 8)
