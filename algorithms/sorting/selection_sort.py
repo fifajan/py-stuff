@@ -30,9 +30,9 @@ def sort(A):
     return sorted_A
         
 
-array1 = [int(line) for line in file(argv[1])]
-array2 = array1[:] # copy array
+if __name__ == '__main__':
+    array1 = [int(line) for line in file(argv[1])]
+    array2 = array1[:] # copy array
 
-print '- Does this algorithm work correctly? (checking it now...)'
-print '- ' + ('Yes!' if sort(array1) == sorted(array2) else 'Nope!')
-
+    print '- Does this algorithm work correctly? (checking it now...)'
+    print '- ' + ('Yes!' if sort(array1) == sorted(array2) else 'Nope!')
