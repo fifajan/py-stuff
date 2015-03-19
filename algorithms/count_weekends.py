@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 from datetime import date, timedelta
 
 def count_we(from_date, to_date):
