@@ -7,13 +7,16 @@ stack = list # standard list should do well as a stack
 
 def find_path_dfs(adj_list, from_v, to_v):
     path = []
+    visited = set()
     vertices_stack = stack((from_v,))
     while vertices_stack:
         vertex = vertices_stack.pop()
-        path = fix_path(adj_list, path, vertex) + [vertex]
-        if vertex == to_v:
-            return path
-        vertices_stack.extend(adj_list[vertex])
+        if vertex not in visited:
+            visited.add(vertex)
+            path = fix_path(adj_list, path, vertex) + [vertex]
+            if vertex == to_v:
+                return path
+            vertices_stack.extend(adj_list[vertex])
 
 def fix_path(adj_list, path, vertex):
     if path:
