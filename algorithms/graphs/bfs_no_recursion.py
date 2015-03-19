@@ -19,6 +19,7 @@ def find_path_bfs(adj_list, from_v, to_v):
             vertices_queue.extendleft(adj_list[vertex])
 
 def fix_path(adj_list, path, vertex):
+    print vertex, path
     if path:
         path_copy = path[:]
         for v in reversed(path_copy):
