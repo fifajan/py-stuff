@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 def is_valid(expr):
     brackets = { ')' : '(', '}' : '{', ']' : '[' }
     stack = []

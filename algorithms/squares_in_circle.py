@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 from math import hypot, ceil
 
 def rel_to_circ(r, sqare_SW):
