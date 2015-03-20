@@ -18,6 +18,7 @@ def find_path_bfs(adj_list, from_v, to_v):
                 return path
             vertices_queue.extendleft(adj_list[vertex])
 
+# Wrong. TODO: fix it for BFS case
 def fix_path(adj_list, path, vertex):
     print vertex, path
     if path:
