@@ -27,8 +27,3 @@ def fix_path(adj_list, path, vertex):
             else:
                 break
     return path
-            
-    
-    
-
-
