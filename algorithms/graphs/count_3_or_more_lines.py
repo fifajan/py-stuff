@@ -1,4 +1,6 @@
 #! /usr/bin/python
+"""
+"""
 
 x = v = lambda v: v[0]
 y = d = lambda v: v[1]
@@ -41,8 +43,16 @@ def all_possible_edges(vertices):
 
 
 if __name__ == '__main__':
-    # Complex 4x4 square:
+    # Triangle (6 vertices):
+    assert 3 == lines_of_3_or_more_count([[1, 1], [1, 3], [3, 3], [1, 7],
+                                          [5, 7], [7, 7]])
+
+    # Complex 4x4 square (15 vertices):
     assert 10 == lines_of_3_or_more_count([[0, 0], [3, 0], [6, 0], [9, 0],
                                            [0, 3], [2, 3], [5, 3], [9, 3],
                                            [0, 6], [4, 6], [9, 6], [0, 9],
                                            [3, 9], [6, 9], [9,9]])
+
+    # Circle (8 vertices, no lines):
+    assert 0 == lines_of_3_or_more_count([[5, 1], [2, 2], [8, 2], [1, 5],
+                                          [9, 5], [2, 8], [8, 8], [5, 9]])
