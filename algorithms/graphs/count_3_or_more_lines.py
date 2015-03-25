@@ -32,7 +32,7 @@ def in_same_line(vertex, vector):
     elif dy == 0:
         return yv == y(vertex)
     else:
-        return (xv - x(vertex))/dx == (yv - y(vertex))/dy
+        return (xv - x(vertex))/float(dx) == (yv - y(vertex))/float(dy)
 
 def all_possible_edges(vertices):
     return {frozenset([tuple(u), 
@@ -41,4 +41,8 @@ def all_possible_edges(vertices):
 
 
 if __name__ == '__main__':
-    pass
+    # Complex 4x4 square:
+    assert 10 == lines_of_3_or_more_count([[0, 0], [3, 0], [6, 0], [9, 0],
+                                           [0, 3], [2, 3], [5, 3], [9, 3],
+                                           [0, 6], [4, 6], [9, 6], [0, 9],
+                                           [3, 9], [6, 9], [9,9]])
