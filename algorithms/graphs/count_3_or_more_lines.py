@@ -1,9 +1,10 @@
 #! /usr/bin/python
-"""
+"""Polynomial time algorithm to figure out how much euclidean lines of 3 or
+more nodes are there in a complete graph.
 """
 
-x = v = lambda v: v[0]
-y = d = lambda v: v[1]
+x = v = lambda t: t[0]
+y = d = lambda t: t[1]
 
 def lines_of_3_or_more_count(vertices):
     edges = all_possible_edges(vertices)
