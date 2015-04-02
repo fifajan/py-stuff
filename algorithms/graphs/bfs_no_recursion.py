@@ -7,16 +7,17 @@ from collections import deque as queue
 
 def find_path_bfs(adj_list, from_v, to_v):
     path = []
-    vertices_queue = queue((from_v,))
+    vertices_queue = queue((None, from_v,))
     visited = set()
     while vertices_queue:
-        vertex = vertices_queue.pop()
+        parrent, vertex = vertices_queue.pop()
         if vertex not in visited:
-            visited.add(vertex)
-            path = fix_path(adj_list, path, vertex) + [vertex]
+            visited.add((parrent, vertex))
+            path += [vertex]
             if vertex == to_v:
-                return path
-            vertices_queue.extendleft(adj_list[vertex])
+                return fix_path(path)
+            parrent_child_pairs = [(vertex, v) for v in adj_list[vertex]]
+            vertices_queue.extendleft(parrent_child_pairs)
 
 # Wrong. TODO: fix it for BFS case
 def fix_path(adj_list, path, vertex):
