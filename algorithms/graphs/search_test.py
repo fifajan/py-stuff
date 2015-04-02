@@ -27,9 +27,8 @@ adj_list[6] = []
 
 g = adj_list
 
-# TODO: fix bfs path
-assert dfs(g, 1, 4) == [1, 2, 3, 4]
-assert dfs(g, 2, 2) == [2]
-assert dfs(g, 2, 5) == [2, 5]
-assert dfs(g, 5, 4) == None
+assert bfs(g, 1, 4) == dfs(g, 1, 4) == [1, 2, 3, 4]
+assert bfs(g, 2, 2) == dfs(g, 2, 2) == [2]
+assert bfs(g, 2, 5) == dfs(g, 2, 5) == [2, 5]
+assert bfs(g, 5, 4) == dfs(g, 5, 4) == None
 
