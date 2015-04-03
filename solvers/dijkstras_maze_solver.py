@@ -254,6 +254,19 @@ if __name__ == '__main__':
     assert DijkstrasMazeSolver(maze).shortest_path == (
                 ((2, 1), (2, 5), (2, 8), (4, 8)), 15) # path, len(path)
 
+    # Same but no framing walls
+    maze = (' S  \n'
+            ':=- \n'
+            '    \n'
+            ' -=:\n'
+            '    \n'
+            '\ .^\n'
+            '/ |_\n'
+            '   E')
+           
+    assert DijkstrasMazeSolver(maze).shortest_path == (
+                ((1, 0), (1, 4), (1, 7), (3, 7)), 15) # previous - (1, 1)
+
     # COOL (!!) example:
     # All chars not in {' ', 'S', 'E'} like "wall" (-,=), "corner" (+),
     #    "water" (~), "monster" in South-West, etc will become obstacles
