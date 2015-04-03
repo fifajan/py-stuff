@@ -1,5 +1,13 @@
 #! /usr/bin/python
 
+# TODO:
+# TODO:
+# TODO:
+# TODO:
+# Something wrong with performance!
+# Check algorithm around line #71 "self.queue.insert((v, alt))"
+# It is possible that heap implementation needs to be fixed.
+
 from heap import PriorityQueue
 
 class DijkstrasMazeSolver(object):
