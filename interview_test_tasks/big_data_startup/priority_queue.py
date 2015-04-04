@@ -64,6 +64,12 @@ class PriorityQueue(object):
             self.percolate_down(1)
             return min 
 
+    def __contains__(self, value):
+        for entry in self.heap[1:]:
+            if entry and entry[0] == value:
+                return True
+        return False
+
     def __len__(self):
         return self.size
 

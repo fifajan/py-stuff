@@ -1,13 +1,5 @@
 #! /usr/bin/python
 
-# TODO:
-# TODO:
-# TODO:
-# TODO:
-# Something wrong with performance!
-# Check algorithm around line #71 "self.queue.insert((v, alt))"
-# It is possible that heap implementation needs to be fixed.
-
 from heap import PriorityQueue
 
 class DijkstrasMazeSolver(object):
@@ -39,7 +31,7 @@ class DijkstrasMazeSolver(object):
         self.shortest_path = self.shortest_exit_path()
 
     def shortest_exit_path(self):
-        self.count_shortest_paths(self.start_v)
+        self.count_shortest_paths(self.start_v, self.exit_v)
         length = self.dist[self.exit_v]
         path = self.get_path(self.exit_v)
         return path, length
@@ -51,7 +43,7 @@ class DijkstrasMazeSolver(object):
         else:
             return path
          
-    def count_shortest_paths(self, source):
+    def count_shortest_paths(self, source, dest):
         self.dist[source] = 0
         self.prev[source] = None
 
@@ -64,13 +56,16 @@ class DijkstrasMazeSolver(object):
 
         while self.queue:
             u = self.queue.pop_min()[0]
+            if u == dest:
+                break
             for v in self.adjacency_list[u]:
                 edge = frozenset((u, v))
                 alt = self.dist[u] + self.edge_weights[edge]
                 if alt < self.dist[v]:
                     self.dist[v] = alt
-                    self.queue.insert((v, alt))
                     self.prev[v] = u
+                    if v not in self.queue:
+                        self.queue.insert((v, alt))
 
 
 class MazeToGraphConverter(object):
