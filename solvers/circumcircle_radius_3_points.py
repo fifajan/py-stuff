@@ -19,4 +19,4 @@ def radius(a, b, c):
 
 
 if __name__ == '__main__':
-    assert abs(radius((0, 0), (1, 0), (0, 1)) - .5 * 2**.5) < .0000000001
+    assert abs(radius((0, 0), (1, 0), (0, 1)) - .5 * 2**.5) < 10**-10
