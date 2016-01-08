@@ -14,7 +14,7 @@ print_t = lambda t : 'Tree:\n%s' % t
 
 print '#### Only insertions:'
 t = RBTree()
-for i in range(100):
+for i in range(1000):
     s = rc() + rc() + rc()
     t.insert(s)
 
@@ -23,9 +23,9 @@ print print_t(t) + '\n#### 4/4 insertions then 3/4 removal:'
 # test deletion
 t = RBTree()
 values = set()
-for i in range(400):
+for i in range(4000):
     s = rc() + rc() + rc()
-    if i > 99:
+    if i > 999:
         values.add(s)
     t.insert(s)
 

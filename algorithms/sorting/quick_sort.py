@@ -49,6 +49,9 @@ if __name__ == '__main__':
 
     setrecursionlimit(2**16) # got 'RuntimeError maximum recursion depth' 
                              # otherwise
+
+    print 'Input read finished.'
+                             
     B = A[:]
     sort((0, len(A) - 1))
 
