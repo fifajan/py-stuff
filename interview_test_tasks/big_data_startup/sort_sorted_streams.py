@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
 
-########################\  (Check out my heavy ASCII art skills! *ROLF*)
+########################\  (Check out my heavy ASCII art skills! *ROFL*)
 ### K sorted streams ####\_____________________________________________
 #######################################################################|
 #                                                                     #|
