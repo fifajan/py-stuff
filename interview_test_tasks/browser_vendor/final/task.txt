@@ -1,0 +1,121 @@
+Note: If tasks descriptions below don't specify some behaviour in details
+(e.g. you miss some information) you are allowed to make your own assumptions.
+In such cases, please describe (e.g. in the code) what assumptions were taken by you.
+
+Task 1.
+
+Suppose you have rectangular area of size M x N. On each field you have 0 or 1.
+Your task is to design algorithm and write Python function for marking the
+largest 8-connected area of ones. Fields from the largest area should have the value 2.
+
+|1|0|1|0|1|    |2|0|2|0|1|
+|1|1|1|0|0| => |2|2|2|0|0|
+|0|1|0|1|0|    |0|2|0|2|0|
+|0|1|0|0|0|    |0|2|0|0|0|
+
+|1|0|1|     |2|0|2|
+|0|1|0| =>  |0|2|0|
+|0|0|0|     |0|0|0|
+
+If there will be more than one such area then all should be marked:
+
+|1|0|0|1|     |2|0|0|2|
+|1|1|0|1| =>  |2|2|0|2|
+|0|0|0|1|     |0|0|0|2|
+
+With the code please provide time complexity of your algorithm (use big O notation - http://en.wikipedia.org/wiki/Big_O_notation).
+
+Your function should have the following signature:
+
+- as a parameter it gets list of lists like:
+    [
+        [1,0,1,0,1],
+        [1,1,1,0,0],
+        [0,1,0,1,0]
+    ]
+
+- returns list of lists like:
+    [
+        [2,0,2,0,1],
+        [2,2,2,0,0],
+        [0,2,0,2,0]
+    ]
+
+The input parameter can be modified.
+=====================================================================================
+Task 2.
+
+For a new project purposes a simple hierarchical database was prepared.
+All data are kept in a single file. Each line inside the file contains single entity.
+Entities are placed in the random order inside the file.
+Format of the entity is as follow:
+{id:<entity_id>, key:<key_string>, value:<value_string>, parent:<parent_id>}
+where:
+<entity_id> - positive integer, unique throughout the database
+<key_string> - key (string) of the entity (there may be many entities with the same key)
+<value_string> - value (string) of the entity (there may be many entities with the same value)
+<parent_id> - entity_id of the parent of the entity. If the entity is the main
+    entity (doesn't have a parent) the parent_id is equal 0
+    (there may be only one main entity in the database).
+
+As an example, a simple scratch of database for a car structure is presented here:
+
+{id:13, key:"car_body", value:"black", parent:3}
+{id:1, key:"car", value:"Opel Astra G", parent:0}
+{id:3, key:"bodywork", value:"kombi", parent:1}
+{id:64, key:"under_body", value:"34382SDF23", parent:1}
+{id: 4, key:"driving_system", value:"DFG324", parent:64}
+{id: 15, key:"wheel", value:"xxx", parent:4}
+{id:13, key:"engine", value:"disel 2.0 DTI", parent:3}
+{id:23, key:"screw", value:"M4", parent:13}
+{id:18, key:"bearing", value:"AX65", parent:13}
+{id:18, key:"bearing", value:"AAH", parent:13}
+{id: 17, key:"bearing", value:"GGH321D", parent:4}
+
+Prepare an application that displays (on the screen) the value_string for all entities
+that match a selector given as an argument. The selector may be a single
+key_string or a list of those keys. If a single key is given, the application
+should display value of the value_string field for all entities that contain
+the key in the key_string field. Basing on the above example, the following result
+should be displayed for "bearing" key given as an argument for the application:
+
+> python selprint.py bearing
+AX65
+AAH
+GGH321D
+
+In the case of usage of multiple key elements in the selector,
+the value of the value_string field for the last key will be displayed.
+All preceding keys are used to specify the search range, i.e. selector
+in the form "underbody bearing" should cause displaying all bearings which constitute the underbody element. As an example:
+> python selprint.py underbody bearing
+GGH321D
+
+Similarly, selector "underbody driving_system bearing" should display the same bearing:
+> python selprint.py underbody driving_system bearing
+GGH321D
+
+In addition, please estimate the time and memory consumption of your algorithm with usage of the Big O notation (http://en.wikipedia.org/wiki/Big_O_notation).
+=====================================================================================
+Task 3
+
+
+Prepare a function that displays nodes values of a tree passed to it as an argument. The passed element is the root node of the tree.
+All values should be displayed by tree levels (one tree level per line), i.e. root node in the firs line, all nodes from the 2nd level in the second line, etc.
+Below example presents the behaviour:
+
+            A
+           / \
+         B    C
+       / | \    \
+     D   E  F    G
+
+For the above tree, the following result should be displayed on the screen:
+A
+B C
+D E F G
+
+You are allowed to decide on the data structure of the tree in the program memory.
+=====================================================================================
+
+Good luck!

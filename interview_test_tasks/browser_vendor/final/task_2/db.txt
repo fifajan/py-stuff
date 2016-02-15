@@ -1,0 +1,11 @@
+{id:13, key:"car_body", value:"black", parent:3}
+{id:1, key:"car", value:"Opel Astra G", parent:0}
+{id:3, key:"bodywork", value:"kombi", parent:1}
+{id:64, key:"under_body", value:"34382SDF23", parent:1}
+{id: 4, key:"driving_system", value:"DFG324", parent:64}
+{id: 15, key:"wheel", value:"xxx", parent:4}
+{id:12, key:"engine", value:"disel 2.0 DTI", parent:3}
+{id:23, key:"screw", value:"M4", parent:13}
+{id:19, key:"bearing", value:"AX65", parent:13}
+{id:18, key:"bearing", value:"AAH", parent:13}
+{id: 17, key:"bearing", value:"GGH321D", parent:4}

@@ -1,0 +1,139 @@
+commit e28efb8f4291a94d2bfac499c7822e0b439029e6
+Date:   Wed Feb 25 17:04:22 2015 +0200
+    Finished.
+
+commit 82646214dedc97b7f6608824fc78c2be505ce4d2
+Date:   Wed Feb 25 17:04:07 2015 +0200
+    Add readme.
+
+commit aa2fc92cd72342bccba35084973c54a5e98851d8
+Date:   Wed Feb 25 16:21:38 2015 +0200
+    Finished all.
+
+commit a4233e7ad9c181319a8faa5e6fac382d333e000d
+Date:   Wed Feb 25 15:54:42 2015 +0200
+    Call args in progress.
+
+commit 594b08c975c25afe1995be6e9272d1604682fb96
+Date:   Wed Feb 25 14:40:32 2015 +0200
+    Started call args implementation.
+
+commit 86feb8ae68e620b43e37dcc1bff79ffef442b59b
+Date:   Wed Feb 25 13:48:18 2015 +0200
+    Add comments.
+
+commit 796b4bed1c04a865022d26dceb366d785dc5657f
+Date:   Wed Feb 25 13:29:52 2015 +0200
+    Added (c) comment
+
+commit 52d223506a940a3b2ece0ec97113b4bacb6da098
+Date:   Wed Feb 25 13:24:50 2015 +0200
+    Implemented int field task.
+
+commit ad4db3a5c27a01e2e34dd153470e430ade1267fc
+Date:   Wed Feb 25 11:28:25 2015 +0200
+    Add some comments.
+
+commit 249eb464f2d48cc8803cccf9bd75db009bd643c1
+Date:   Wed Feb 25 11:12:18 2015 +0200
+    Finish PDF tests implementation.
+
+commit 5c26c96672d36bbced801bc63b3ecfdba8591768
+Date:   Wed Feb 25 10:48:48 2015 +0200
+    Add tests from PDF.
+
+commit 68b8384af04d5b05f254406168fa541d1d988cfe
+Date:   Wed Feb 25 10:30:07 2015 +0200
+    Add useful comments.
+
+commit cd7038ac113ab0fb147516f4162bd3a8af8fdbbe
+Date:   Wed Feb 25 10:07:42 2015 +0200
+    Covered 100% of code by tests.
+
+commit 062a2048c09f5fcb66ece233fadae3cc7d62afe0
+Date:   Tue Feb 24 18:42:06 2015 +0200
+    Fix craft test.
+
+commit 504fe1557edde4c254ff45470e71b95c8f06041d
+Date:   Tue Feb 24 20:41:10 2015 +0400
+    Fix clear.
+
+commit 9d75c2968dd0e13fafcbcf459bb05e534ad5b671
+Date:   Tue Feb 24 18:10:57 2015 +0200
+    Implemented tests for str.
+
+commit ba4a08a95c5156cfa4fe89b650b6a53715f6e8b4
+Date:   Tue Feb 24 19:59:35 2015 +0400
+    Made long sword shorter.
+
+commit b5b1132c41f1dba0fa953f755a190ac34afd564c
+Date:   Tue Feb 24 17:56:19 2015 +0200
+    Used len in tests.
+
+commit 1e0fbd9fe3796433707db5497504ba663a2fd64b
+Date:   Tue Feb 24 17:48:14 2015 +0200
+    Implement __str__ for wb.
+
+commit 9250498c9bba81d365783c0a22732ec00133da8d
+Merge: 284c6fc 1b07e6c
+Date:   Tue Feb 24 16:43:29 2015 +0200
+    Merge branch 'dev' of swdevelop.net:/swd/py-alg into dev
+    Conflicts:
+    	msc/workbench.py
+
+commit 284c6fc7c07794073b7279ff169ff65352de13f7
+Date:   Tue Feb 24 16:42:08 2015 +0200
+    ?
+
+commit 1b07e6c5ab84f7b225805a3073be9cf3d3ce56bf
+Date:   Tue Feb 24 18:41:15 2015 +0400
+    Add few tests + fixed some issues.
+
+commit 12cfca11190100779fe1c7f55911cd37c6f77114
+Date:   Tue Feb 24 18:09:03 2015 +0400
+    Fixed some issues and made it work.
+
+commit 674edd2503be6621cec47eae31931eefc7a0b8bd
+Date:   Tue Feb 24 17:45:20 2015 +0400
+    Shorten & optimized code by using dict/sets for workbench grid (instead of n*m matrix).
+
+commit d4812d067904e7c0f844925dd5e93a72332ef25e
+Date:   Tue Feb 24 14:48:54 2015 +0200
+    Add tests.
+
+commit 6b271d6dc3f61e90c41547e59efd17b7bd1f2ece
+Date:   Tue Feb 24 14:41:21 2015 +0200
+    Add long sword.
+
+commit d5845c874322566cdd2cb01b2718748cb6ab4624
+Date:   Tue Feb 24 13:40:50 2015 +0200
+    Finish initial implementation.
+
+commit c24bc62bded678c85c5d1688e08f45eaab892ecf
+Date:   Tue Feb 24 13:23:03 2015 +0200
+    In progress.
+
+commit f027a40f7050ffccca07d704199f943dab8359ff
+Date:   Tue Feb 24 12:02:12 2015 +0200
+    In progress.
+
+commit b18ebb8f98624d430f3018866b28411e783d3f25
+Date:   Tue Feb 24 11:07:42 2015 +0200
+    Fix update.
+
+commit ca69f12aac501bdc4108f971db85eab2f1642ba3
+Date:   Tue Feb 24 10:52:12 2015 +0200
+    In progress.
+
+commit 18eb3969eace7dd10d9c662fe87572f6ba2508cd
+Date:   Tue Feb 24 09:50:34 2015 +0200
+    Create initial classes.
+
+commit e813ffb5d4a75c1a258f1d9d109be64024504e72
+Date:   Mon Feb 23 17:46:46 2015 +0200
+    Add idea
+
+commit 673e1091109955902b70ad2999373c8aa0c5881b
+Date:   Mon Feb 23 17:00:05 2015 +0200
+    Add blank files for msc assesment.
+
