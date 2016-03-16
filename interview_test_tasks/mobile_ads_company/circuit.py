@@ -76,7 +76,6 @@ class Circuit():
         self.load_input(input_file_name)
         print('Finished reading input.\n%d nodes read.' % len(self.nodes))
         self.resolve()
-        self.root = type(self).STORAGE[type(self).ROOT_NODE]
 
     def __repr__(self):
         result = ''
@@ -87,15 +86,14 @@ class Circuit():
 
     def load_input(self, filename):
         with open(filename) as input_file:
-            id = 1
-            for line in input_file:
+            for number, line in enumerate(input_file):
                 exp = Expression(line)
-                self.nodes.add(exp.parse(id))
-                id += 1
+                self.nodes.add(exp.parse(number))
 
     def resolve(self):
         graph = CircuitGraph(self.nodes)
         graph.resolve()
+        self.root = type(self).STORAGE[type(self).ROOT_NODE]
         print('SIGNALS:\n%s' % self)
 
 
@@ -108,7 +106,6 @@ class CircuitGraph():
     LEAF_MARK = 'LEAF'
 
     def __init__(self, nodes):
-        self.queue = []
         self.nodes = nodes
         self.deps_cache = dict()
 
@@ -416,9 +413,9 @@ class BinaryOperatorFactory():
 if __name__ == '__main__':
     input_files = (
         # my small tests (described in my_test.txt):
-        ('st0.txt', 536), ('mt1.txt', 536), ('mt2.txt', 536), ('mt3.txt', 536),
+        #('st0.txt', 536), ('mt1.txt', 536), ('mt2.txt', 536), ('mt3.txt', 536),
         # big "real" (from AoC site, ~340 lines) tests:
-        ('bigt1.txt', 3176), ('bigt2.txt', 46065),
+        ('bigt1.txt', 3176),# ('bigt2.txt', 46065),
     )
     for in_file, result in input_files:
         circuit = Circuit(in_file)
