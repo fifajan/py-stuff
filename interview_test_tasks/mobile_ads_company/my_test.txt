@@ -1,0 +1,142 @@
+
+       146          201      11        19         146 -> y
+        |            |       |         |          19 -> x
+        |            |       |     19 [x]         11 -> b
+        |            |       |         |          x -> c
+   146 [y]      201 [z]  11 [b]    19 [c]         201 -> z
+         \          /       /         /           y -> m
+          \        /       /         /            b -> d
+      146 [m]     /       /         /             c -> k
+            \    /   11 [d]        /              m AND z -> l
+             \  /        |        /               d -> r
+             _AND_       |   19 [k]               r -> i
+               \     11 [r]     /                 i AND k -> g
+                \        |     /                  l LSHIFT 2 -> e
+            128 [l]      |    /                   g LSHIFT 3 -> o
+                 |   11 [i]  /                    e OR o -> j
+                 |       |  /                     j -> a
+                 |       | /
+       512 _LSHIFT_2_   _AND_ 3 
+                 |       |
+                 |      [g]
+                 |       |
+                 |    _LSHIFT_3_ 24
+                 |      /
+                 |    [o] 24
+                 |    /
+            512 [e]  /
+                  \ /
+              536 _OR_
+                   |
+                   |
+              536 [j]
+                   |
+              536 [a]
+
+
+### STRAIGHT INPUT ###
+
+146 -> y
+19 -> x
+11 -> b
+x -> c
+201 -> z
+y -> m
+b -> d
+c -> k
+m AND z -> l
+d -> r
+r -> i
+i AND k -> g
+l LSHIFT 2 -> e
+g LSHIFT 3 -> o
+e OR o -> j
+j -> a
+
+### MIXED INPUT 1 ###
+
+i AND k -> g
+g LSHIFT 3 -> o
+201 -> z
+y -> m
+b -> d
+11 -> b
+x -> c
+c -> k
+m AND z -> l
+j -> a
+146 -> y
+19 -> x
+l LSHIFT 2 -> e
+e OR o -> j
+d -> r
+r -> i
+
+### MIXED INPUT 2 ###
+
+g LSHIFT 3 -> o
+201 -> z
+y -> m
+b -> d
+11 -> b
+l LSHIFT 2 -> e
+e OR o -> j
+d -> r
+x -> c
+i AND k -> g
+146 -> y
+19 -> x
+c -> k
+m AND z -> l
+j -> a
+r -> i
+
+### MIXED INPUT 3 ###
+
+201 -> z
+y -> m
+e OR o -> j
+x -> c
+b -> d
+11 -> b
+i AND k -> g
+d -> r
+l LSHIFT 2 -> e
+146 -> y
+j -> a
+19 -> x
+c -> k
+m AND z -> l
+r -> i
+g LSHIFT 3 -> o
+
+######################### DEBUG (example - MIXED 3) ##########################
+
+DEPENDENCES TREE:
+
+{  11:Input:VAR-j:VAR-a :
+     {  3:OR:[VAR-e, VAR-o]:VAR-j :
+        {  16:LSHIFT:[VAR-g, 3]:VAR-o :
+             {  7:AND:[VAR-i, VAR-k]:VAR-g :
+                {  15:Input:VAR-r:VAR-i :
+                     {  8:Input:VAR-d:VAR-r :
+                        {  5:Input:VAR-b:VAR-d :
+                           {  6:Input:11:VAR-b : 'LEAF'  }
+                        }
+                     },
+                   13:Input:VAR-c:VAR-k :
+                     {  4:Input:VAR-x:VAR-c :
+                        {  12:Input:19:VAR-x : 'LEAF'  }
+                     }
+                }
+            },
+          9:LSHIFT:[VAR-l, 2]:VAR-e :
+            {  14:AND:[VAR-m, VAR-z]:VAR-l :
+               {  2:Input:VAR-y:VAR-m :
+                    {  10:Input:146:VAR-y: 'LEAF' },
+                  1:Input:201:VAR-z : 'LEAF' }
+            }
+        }
+     }
+}
+

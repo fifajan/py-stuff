@@ -1,0 +1,16 @@
+g LSHIFT 3 -> o
+201 -> z
+y -> m
+b -> d
+11 -> b
+l LSHIFT 2 -> e
+e OR o -> j
+d -> r
+x -> c
+i AND k -> g
+146 -> y
+19 -> x
+c -> k
+m AND z -> l
+j -> a
+r -> i

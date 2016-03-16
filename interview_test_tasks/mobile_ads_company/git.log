@@ -1,0 +1,234 @@
+commit 03e591e6d563053dea0d57d6e1e9d30ec4f96b01
+Author: fifajan <me@swdevelop.net>
+Date:   Mon Mar 14 08:07:04 2016 +0200
+
+    Morning docstrings. FINISHED!
+
+commit f80f7cb85f288d9eaf712882c8e8046c3f37ba5d
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 22:35:53 2016 +0200
+
+    Cleanup.
+
+commit 2226705b6d25cca4b22612d7102a3af1938d0153
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 22:07:17 2016 +0200
+
+    Add new tests, code cleanups.
+
+commit efb5060d1414347cfca7c01bacc6340cbe0ed572
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 21:46:30 2016 +0200
+
+    Works on custom inputs!! HURAYYY!!!!1
+
+commit 61ae0feb6d2a8e0f32aafeae1131f46dd599ce3a
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 21:46:05 2016 +0200
+
+    Add custom inputs.
+
+commit 793ae6636a232940fd9307c1abb9ef7b4f38008a
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 19:41:10 2016 +0200
+
+    Cleanup.
+
+commit c0dcc5c40efa4a6dc10befe9f3f0f65afb2121c7
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 19:29:21 2016 +0200
+
+    Cleaned prints up.
+
+commit 29cf9e7cda10e9d47018ace45b8257cdd982cfdc
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 17:43:03 2016 +0200
+
+    Before tried list.
+
+commit 92123e7eb73119b4bf492b40f9ad169453af4313
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 16:39:27 2016 +0200
+
+    Slow....
+
+commit 0f5beb7344aacdeb06f1d69821dff08936258823
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 13:59:50 2016 +0200
+
+    Before major clenups.
+
+commit 7644a0b2d1045d55d0631560d75db17118de0e17
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 11:53:17 2016 +0200
+
+    In progress.
+
+commit 5d60b5369fdc5c83df41a4a11e205d1c62b04cff
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 11:13:28 2016 +0200
+
+    Cleanups.
+
+commit 2de4cc3a215101ca613bff409f790da779489724
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 10:47:04 2016 +0200
+
+    Almost
+
+commit 526d945bda482c58d9f09d150ec4c08b974b86b2
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 10:33:53 2016 +0200
+
+    Almost
+
+commit 265aaa79bd4466701ac065f3ff69cea1cade3a9a
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 09:30:24 2016 +0200
+
+    Implemet adjacent.
+
+commit 6ff881b8dd54426c8b44540e65db22f90d726322
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 09:13:17 2016 +0200
+
+    Graph in progress...
+
+commit c9223234fe434053b88143db4f34d838fe7f84a8
+Author: fifajan <me@swdevelop.net>
+Date:   Sun Mar 13 09:05:01 2016 +0200
+
+    Graph in progress.
+
+commit e22052a09889a5c3cfa94f90f4266115c879876b
+Author: fifajan <me@swdevelop.net>
+Date:   Sat Mar 12 11:25:54 2016 +0200
+
+    Almost...
+
+commit 30bb0cac05b1ed24bb683b53112a509ce6482416
+Author: fifajan <me@swdevelop.net>
+Date:   Sat Mar 12 10:52:37 2016 +0200
+
+    In progress.
+
+commit 64380fc10981d446cbb32c9583d0dfe02dea1132
+Author: fifajan <me@swdevelop.net>
+Date:   Sat Mar 12 09:27:50 2016 +0200
+
+    Change Node`s str repr.
+
+commit e9a30c09bd13779f36fab1e8831448e01bc12512
+Author: fifajan <me@swdevelop.net>
+Date:   Sat Mar 12 09:16:54 2016 +0200
+
+    Graph in progress.
+
+commit 286901b18ca4fac15a2908136d836998c11b84ed
+Author: fifajan <me@swdevelop.net>
+Date:   Sat Mar 12 08:44:22 2016 +0200
+
+    Start graph approach implementation.
+
+commit 1fc6cbb32b8bcdb477d7fdceb54ef799e13da351
+Author: fifajan <me@swdevelop.net>
+Date:   Sat Mar 12 08:37:52 2016 +0200
+
+    Before introducing graph search.
+
+commit 1cf7b5f2bcb0fda95d65f9542290472e4c3405f3
+Author: me <me@swdevelop.net>
+Date:   Fri Mar 11 18:58:23 2016 +0000
+
+    Removed unrelated stuff.
+
+commit b34648661e7695a665790d07b53fc971568f24fa
+Merge: 0343b9b ee76627
+Author: me <me@swdevelop.net>
+Date:   Fri Mar 11 18:53:48 2016 +0000
+
+    Merge branch 'dev' of ******develop.net:/swd/py-alg
+
+commit ee766272c5cd2fbb5aa16be4cbdb0710374a98d1
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 19:46:25 2016 +0200
+
+    In progress...
+
+commit 419efb6b52c2447f7000d6178cd5d6fb5b474352
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 19:30:52 2016 +0200
+
+    Should do the real input...
+
+commit 77eafcf93d27d7ae0a0d5c4579bbeda4f9b1aa67
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 19:08:04 2016 +0200
+
+    Some minor refactorings.
+
+commit d1428279e1474dd82394038b251a3639ef660320
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 17:16:29 2016 +0200
+
+    Add polishment TODOs.
+
+commit 8b29fbedd408e771cb717855a79faafc891985b1
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 17:12:47 2016 +0200
+
+    WORKS!!
+
+commit a607dc0b6f473ca30be017ce566727c13d76a223
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 15:51:34 2016 +0200
+
+    97% finished.
+
+commit 3161b31c395f43cef769228411d84f1edaeb7a43
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 15:42:28 2016 +0200
+
+    96% finished.
+
+commit c3876c4a6bc83086807f8a5c2af7f45835581959
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 15:32:53 2016 +0200
+
+    95% finished.
+
+commit e418cc4d1382b579957ca0e5f3cc8633787004ac
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 14:38:03 2016 +0200
+
+    After the first run.
+
+commit e8bc41c24f112cd4a0663ae4a350a3ec4c77094d
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 14:27:39 2016 +0200
+
+    Ready for test run.
+
+commit b476136b64ce3ac101f6d9ba0ee049580ede6d57
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 14:22:40 2016 +0200
+
+    Now operators work fine.
+
+commit d5e3706f0f9c3407d0ff2d931687d9da9bbae3c4
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 14:07:25 2016 +0200
+
+    Now operators work fine.
+
+commit 3580c2f279695e4ef59070f36cde48c9cadc933c
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 13:55:34 2016 +0200
+
+    Add decorator for bitwise ops.
+
+commit 7db77b4bd28ea36240f8c0b723a751ad48146517
+Author: fifajan <me@swdevelop.net>
+Date:   Fri Mar 11 13:18:44 2016 +0200
+
+    In progress.

@@ -1,0 +1,16 @@
+146 -> y
+19 -> x
+11 -> b
+x -> c
+201 -> z
+y -> m
+b -> d
+c -> k
+m AND z -> l
+d -> r
+r -> i
+i AND k -> g
+l LSHIFT 2 -> e
+g LSHIFT 3 -> o
+e OR o -> j
+j -> a
