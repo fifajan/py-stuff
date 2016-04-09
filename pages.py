@@ -3,13 +3,12 @@
 '''Script for page numbers generation. Aim is to make printing brochures
 "easy".'''
 
-EVEN_ONLY = False
 
-def pages(total):
+def pages(total, even_only=True):
     result = []
     for pages_4 in div_by_4(int(total)):
         p1, p2, p3, p4 = pages_4
-        if EVEN_ONLY:
+        if even_only:
             brochured = [str(p) for p in [p4, p1]]
         else:
             brochured = [str(p) for p in [p2, p3]]
@@ -43,7 +42,11 @@ def div_by_4(total):
 if __name__ == '__main__':
     from sys import argv
 
-    if (len(argv) != 2) or not argv[1].isdigit():
+    if (len(argv) != 3) or not argv[1].isdigit():
         print('USAGE: $ ./pages.py <TOTAL_PAGE_COUNT>')
     else:
-        print(pages(argv[1]))
+        even_only = False
+        if argv[2].upper() == 'E':
+            even_only = True
+
+        print(pages(argv[1], even_only))
