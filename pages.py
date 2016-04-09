@@ -14,7 +14,6 @@ def pages(total, even_only=True):
             brochured = [str(p) for p in [p2, p3]]
         result.extend(brochured)
 
-    print(result)
     return ', '.join(result)
 
 def div_by_4(total):
