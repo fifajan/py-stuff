@@ -42,7 +42,7 @@ if __name__ == '__main__':
     from sys import argv
 
     if (len(argv) != 3) or not argv[1].isdigit():
-        print('USAGE: $ ./pages.py <TOTAL_PAGE_COUNT>')
+        print('USAGE: $ ./pages.py <TOTAL_PAGE_COUNT> E/O')
     else:
         even_only = False
         if argv[2].upper() == 'E':
