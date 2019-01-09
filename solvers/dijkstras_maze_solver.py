@@ -35,14 +35,14 @@ class DijkstrasMazeSolver(object):
         length = self.dist[self.exit_v]
         path = self.get_path(self.exit_v)
         return path, length
-                
+
     def get_path(self, v, path=()):
-        path = (v,) + path 
+        path = (v,) + path
         if self.prev[v] and v != self.start_v:
             return self.get_path(self.prev[v], path)
         else:
             return path
-         
+
     def count_shortest_paths(self, source, dest):
         self.dist[source] = 0
         self.prev[source] = None
@@ -101,7 +101,7 @@ class MazeToGraphConverter(object):
         [1,(Q),1, 1, 0, 1, 1, 1, 1, 1,(J),1],   (Q) = (1, 8); (J) = (10, 8)
         [1,(O),0, 0,(P),0, 0, 0, 0, 1, 1, 1],   (O) = (1, 9); (P) = (4, 9)
         [1,(L),1, 1, 1, 1, 1, 1, 0, 0,(M),1],   (L) = (1, 10); (M) = (10, 10)
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ]                                            Nodes are:
                                                     - start cell;
                                                     - exit cell;
@@ -111,7 +111,7 @@ class MazeToGraphConverter(object):
 
                                            Simplified weighted graph:
 
-                                                       (D) 
+                                                       (D)
     Simplified maze (graph inside):    start vertex     #
                                             |           #
     +----------------+-------------+        V           #
@@ -136,7 +136,7 @@ class MazeToGraphConverter(object):
     [or]                                                           ||
         (1,1) -> (4,4) -> (6,4) -> (8,7) -> (4,7) -> (1,6)         ||
     [edge     ||       ||       ||       ||       ||
-     weights]: 6   +    2   +   15   +    4    +   4       =       31 
+     weights]: 6   +    2   +   15   +    4    +   4       =       31
     """
     def __init__(self, maze, start_cell=(1, 1)):
         self.graph_vertices = set()
@@ -266,7 +266,7 @@ if __name__ == '__main__':
             '\ .^\n'
             '/ |_\n'
             '   E')
-           
+
     assert DijkstrasMazeSolver(maze).shortest_path == (
                 ((1, 0), (1, 4), (1, 7), (3, 7)), 15) # previous - (1, 1)
 
@@ -287,7 +287,7 @@ if __name__ == '__main__':
             '+=====+->   /~~~|E|~~| |~~~~~~\n'  # E - exit
             ' }O_o{|     |~~~+-+~~+~+~~~~~~\n'
             '  ^^^ |_/\__/~~~~~~~~~~~~~~~~~\n')
-            
+
     assert DijkstrasMazeSolver(maze).shortest_path == (
         ((6, 3), (10, 1), (14, 1), (18, 1), (25, 1), (25, 2), (25, 3),
          (22, 5), (22, 7), (20, 7), (17, 7), (17, 9)), 37)
